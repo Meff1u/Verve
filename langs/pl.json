@@ -18,7 +18,9 @@
             "sFooterRequested": "Dodane przez:",
             "pTitle": "Dodano playlistę:",
             "pFooterSongs": "Utworów:",
-            "noVC": "Musisz być na kanale głosowym!"
+            "noVC": "Musisz być na kanale głosowym!",
+            "noSong": "Nie znaleziono takiego utworu!",
+            "noPlaylist": "Nie znaleziono takiej playlisty!"
         },
         "queue": {
             "details": "> • Wyświetla pierwsze 15 utworów w kolejce.\n> • Można kliknąć przycisk \"Cała kolejka\", wtedy bot wyśle całą kolejkę w pliku tekstowym.",

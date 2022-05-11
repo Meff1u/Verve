@@ -74,6 +74,18 @@ module.exports = {
                 .setColor('RED');
                 return await interaction.followUp({ embeds: [embed] });
             }
+            else if (e.stack.toString().includes(`Cannot set properties of undefined (setting 'data')`) || e.stack.toString().includes('SearchIsNull')) {
+                const embed = new MessageEmbed()
+                .setTitle(lang.commands.play.noSong)
+                .setColor('RED');
+                return await interaction.followUp({ embeds: [embed] });
+            }
+            else if (e.stack.toString().includes('InvalidPlaylist')) {
+                const embed = new MessageEmbed()
+                .setTitle(lang.commands.play.noPlaylist)
+                .setColor('RED');
+                return await interaction.followUp({ embeds: [embed] });
+            }
             else {
                 console.error(e);
                 let id = '';

@@ -16,7 +16,9 @@
             "sFooterRequested": "Added by:",
             "pTitle": "Playlist added:",
             "pFooterSongs": "Songs:",
-            "noVC": "You must be in the voice channel!"
+            "noVC": "You must be in the voice channel!",
+            "noSong": "No such track found!",
+            "noPlaylist": "No such playlist found!"
         },
         "queue": {
             "details": "> • Displays the first 15 songs in the queue.\n> • You can click the \"Full Queue\" button, then the bot will send the entire queue in a text file.",
