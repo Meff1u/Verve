@@ -16,7 +16,18 @@
             "sTitle2": "Dodano do kolejki:",
             "sFooterPos": "Pozycja:",
             "sFooterRequested": "Dodane przez:",
-            "pTitle": "Dodano playlistę:"
+            "pTitle": "Dodano playlistę:",
+            "pFooterSongs": "Utworów:",
+            "noVC": "Musisz być na kanale głosowym!"
+        },
+        "queue": {
+            "details": "> • Wyświetla pierwsze 15 utworów w kolejce.\n> • Można kliknąć przycisk \"Cała kolejka\", wtedy bot wyśle całą kolejkę w pliku tekstowym.",
+            "noQueue": "Brak kolejki dla tego serwera!",
+            "title": "Kolejka",
+            "button": "Cała kolejka"
         }
+    },
+    "errors": {
+        "init": "Wystąpił błąd, skontaktuj się z deweloperem podając ID błędu:"
     }
 }

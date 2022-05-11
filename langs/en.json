@@ -14,7 +14,18 @@
             "sTitle2": "Added to queue:",
             "sFooterPos": "Position:",
             "sFooterRequested": "Added by:",
-            "pTitle": "Playlist added:"
+            "pTitle": "Playlist added:",
+            "pFooterSongs": "Songs:",
+            "noVC": "You must be in the voice channel!"
+        },
+        "queue": {
+            "details": "> • Displays the first 15 songs in the queue.\n> • You can click the \"Full Queue\" button, then the bot will send the entire queue in a text file.",
+            "noQueue": "There is no queue for this server!",
+            "title": "Queue",
+            "button": "Full Queue"
         }
+    },
+    "errors": {
+        "init": "An error has occurred, please contact the developer with the error ID:"
     }
 }
