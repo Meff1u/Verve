@@ -1,0 +1,20 @@
+{
+    "commands": {
+        "help": {
+            "details": "> • Displays all available commands.\n> • You can use /help <command name> to get more information about a given command.\n> • Also includes a link to the support server.",
+            "desc": "Displays the available commands.",
+            "title": "Available commands",
+            "footer": "Type /help <command name> for find out more!",
+            "helpName": "Need more help or want to report a bug?",
+            "helpValue": "Join the [support server](https://discord.gg/fMUmHvQV43)!"
+        },
+        "play": {
+            "details": "> • /play song <title/link> allows you to play a specific song.\n> • /play playlist <link> allows you to play the entire playlist.",
+            "sTitle1": "Now playing:",
+            "sTitle2": "Added to queue:",
+            "sFooterPos": "Position:",
+            "sFooterRequested": "Added by:",
+            "pTitle": "Playlist added:"
+        }
+    }
+}

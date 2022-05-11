@@ -1,0 +1,22 @@
+{
+    "commands": {
+        "help": {
+            "details": "> • Wyświetla wszystkie dostępne komendy.\n> • Za pomocą /help <nazwa komendy> można wyświetlić więcej informacji na temat danej komendy.\n> • Zawiera również link do serwera wsparcia.",
+            "desc": "Wyświetla dostępne komendy.",
+            "title": "Dostępne komendy",
+            "footer": "Wpisz /help <nazwa komendy>, aby dowiedzieć się więcej!",
+            "helpName": "Potrzebujesz więcej pomocy lub chcesz zgłosić błąd?",
+            "helpValue": "Dołącz na [serwer wsparcia](https://discord.gg/fMUmHvQV43)!",
+            "cNoCommand": "Nie znaleziono takiej komendy!",
+            "cTitle": "Komenda:"
+        },
+        "play": {
+            "details": "> • /play song <tytuł/link> pozwala na puszczenie konkretnej piosenki.\n> • /play playlist <link> pozwala na puszczenie całej playlisty.",
+            "sTitle1": "Teraz gram:",
+            "sTitle2": "Dodano do kolejki:",
+            "sFooterPos": "Pozycja:",
+            "sFooterRequested": "Dodane przez:",
+            "pTitle": "Dodano playlistę:"
+        }
+    }
+}

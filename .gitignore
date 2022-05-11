@@ -2,6 +2,7 @@ config.json
 node_modules
 .eslintrc.json
 Verve 2.0.code-workspace
-deploy-commands.js
+deploy.js
 package-lock.json
 package.json
+guilds-data
