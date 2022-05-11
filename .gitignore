@@ -1,0 +1,7 @@
+config.json
+node_modules
+.eslintrc.json
+Verve 2.0.code-workspace
+deploy-commands.js
+package-lock.json
+package.json
