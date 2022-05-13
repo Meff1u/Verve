@@ -86,6 +86,12 @@ module.exports = {
                 .setColor('RED');
                 return await interaction.followUp({ embeds: [embed] });
             }
+            else if (e.stack.toString().includes('VoiceConnectionError')) {
+                const embed = new MessageEmbed()
+                .setTitle(lang.commands.play.vcError)
+                .setColor('RED');
+                return await interaction.followUp({ embeds: [embed] });
+            }
             else {
                 console.error(e);
                 let id = '';

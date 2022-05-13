@@ -1,4 +1,4 @@
-const { Client, Intents, Collection, MessageAttachment } = require('discord.js');
+const { Client, Intents, Collection, MessageAttachment, Permissions } = require('discord.js');
 const { token } = require('./config.json');
 const fs = require('fs');
 
@@ -38,6 +38,7 @@ client.on('interactionCreate', async interaction => {
         if (!command) return;
         const settings = require(`./guilds-data/${interaction.guild.id}/settings.json`);
         const lang = require(`./langs/${settings.lang}.json`);
+        if (!interaction.channel.permissionsFor(interaction.guild.me).has(Permissions.FLAGS.VIEW_CHANNEL)) return await interaction.reply({ content: lang.errors.permViewChannel, ephemeral: true });
         try {
             // eslint-disable-next-line prefer-const
             let gqueue = client.player.getQueue(interaction.guild.id);

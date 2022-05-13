@@ -20,16 +20,19 @@
             "pFooterSongs": "Utworów:",
             "noVC": "Musisz być na kanale głosowym!",
             "noSong": "Nie znaleziono takiego utworu!",
-            "noPlaylist": "Nie znaleziono takiej playlisty!"
+            "noPlaylist": "Nie znaleziono takiej playlisty!",
+            "vcError": "Błąd podczas dołączania na kanał głosowy!\nUpewnij się, że mam wystarczające permisje!"
         },
         "queue": {
             "details": "> • Wyświetla pierwsze 15 utworów w kolejce.\n> • Można kliknąć przycisk \"Cała kolejka\", wtedy bot wyśle całą kolejkę w pliku tekstowym.",
             "noQueue": "Brak kolejki dla tego serwera!",
             "title": "Kolejka",
-            "button": "Cała kolejka"
+            "button": "Cała kolejka",
+            "more": "więcej"
         }
     },
     "errors": {
-        "init": "Wystąpił błąd, skontaktuj się z deweloperem podając ID błędu:"
+        "init": "Wystąpił błąd, skontaktuj się z deweloperem podając ID błędu:",
+        "permViewChannel": "Brak permisji `WYŚWIETLANIE KANAŁU` na tym kanale!"
     }
 }

@@ -4,6 +4,5 @@ node_modules
 Verve 2.code-workspace
 deploy.js
 package-lock.json
-package.json
 guilds-data
 fullqueue.txt
