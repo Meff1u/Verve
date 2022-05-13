@@ -6,10 +6,13 @@
             "title": "Available commands",
             "footer": "Type /help <command name> for find out more!",
             "helpName": "Need more help or want to report a bug?",
-            "helpValue": "Join the [support server](https://discord.gg/fMUmHvQV43)!"
+            "helpValue": "Join the [support server](https://discord.gg/fMUmHvQV43)!",
+            "cNoCommand": "No such command was found!",
+            "cTitle": "Command:"
         },
         "play": {
             "details": "> • /play song <title/link> allows you to play a specific song.\n> • /play playlist <link> allows you to play the entire playlist.",
+            "desc": "Adds a track or playlist to the queue.",
             "sTitle1": "Now playing:",
             "sTitle2": "Added to queue:",
             "sFooterPos": "Position:",
@@ -23,10 +26,16 @@
         },
         "queue": {
             "details": "> • Displays the first 15 songs in the queue.\n> • You can click the \"Full Queue\" button, then the bot will send the entire queue in a text file.",
+            "desc": "Lists the songs that are queued.",
             "noQueue": "There is no queue for this server!",
             "title": "Queue",
             "button": "Full Queue",
             "more": "more"
+        },
+        "seek": {
+            "details": "> • Seek the current track to the entered time.\n> • Example usage: /seek 30s, /seek 2m, /seek 1m 35s",
+            "desc": "Seek the current track to the entered time.",
+            "forwarded": "Forwarded to"
         }
     },
     "errors": {

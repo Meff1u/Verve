@@ -12,6 +12,7 @@
         },
         "play": {
             "details": "> • /play song <tytuł/link> pozwala na puszczenie konkretnej piosenki.\n> • /play playlist <link> pozwala na puszczenie całej playlisty.",
+            "desc": "Dodaje utwór lub playlistę do kolejki.",
             "sTitle1": "Teraz gram:",
             "sTitle2": "Dodano do kolejki:",
             "sFooterPos": "Pozycja:",
@@ -25,10 +26,16 @@
         },
         "queue": {
             "details": "> • Wyświetla pierwsze 15 utworów w kolejce.\n> • Można kliknąć przycisk \"Cała kolejka\", wtedy bot wyśle całą kolejkę w pliku tekstowym.",
+            "desc": "Wyświetla utwory w kolejce.",
             "noQueue": "Brak kolejki dla tego serwera!",
             "title": "Kolejka",
             "button": "Cała kolejka",
             "more": "więcej"
+        },
+        "seek": {
+            "details": "> • Przewija aktualnie grany utwór do podanego czasu.\n> • Przykładowe użycie: /seek 30s, /seek 2m, /seek 1m 35s",
+            "desc": "Przewija aktualną piosenkę do podanego czasu.",
+            "forwarded": "Przewinięto do"
         }
     },
     "errors": {
