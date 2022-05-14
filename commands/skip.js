@@ -1,16 +1,10 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
-const ms = require('ms');
-// const trans = require('translate');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('seek')
-        .setDescription('Seek the current track to the entered time.')
-        .addStringOption(option => option
-            .setName('time')
-            .setDescription('E.g: 1m 20s')
-            .setRequired(true)),
+        .setName('skip')
+        .setDescription('Skips the current track.'),
     async execute(interaction, gqueue, settings, lang) {
         await interaction.deferReply();
         if (!gqueue || gqueue.songs.length === 0) {
@@ -19,27 +13,14 @@ module.exports = {
             .setColor('RED');
             return await interaction.followUp({ embeds: [embed] });
         }
-
-        const time = interaction.options.getString('time').split(' ');
-        let mstime = 0;
-        for (let i = 0; i < time.length; i++) {
-            mstime += ms(time[i]);
-        }
         try {
-            await gqueue.seek(mstime);
+            await gqueue.skip();
             const embed = new MessageEmbed()
-            .setTitle(`✅ Forwared to ${ms(mstime, { long: true })}`)
+            .setTitle(`✅ ${lang.commands.skip.skipped}`)
             .setColor('#AB40AF');
             return await interaction.followUp({ embeds: [embed] });
         }
         catch (e) {
-            if (e.stack.toString().includes('val=null')) {
-                const embed = new MessageEmbed()
-                .setTitle(lang.commands.seek.error)
-                .setColor('RED');
-                return await interaction.followUp({ embeds: [embed] });
-            }
-            else {
                 console.error(e);
                 let id = '';
                 for (let i = 0; i < 5; i++) {
@@ -47,7 +28,6 @@ module.exports = {
                 }
                 interaction.client.channels.cache.get('973939815601045564').send(`Error [${id}]\n\`\`\`${e.stack}\`\`\``);
                 await interaction.followUp({ content: `${lang.errors.init} [${id}]`, ephemeral: true });
-            }
         }
     },
 };

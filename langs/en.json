@@ -35,11 +35,17 @@
         "seek": {
             "details": "> • Seek the current track to the entered time.\n> • Example usage: /seek 30s, /seek 2m, /seek 1m 35s",
             "desc": "Seek the current track to the entered time.",
-            "forwarded": "Forwarded to"
+            "forwarded": "Forwarded to",
+            "error": "Error while forwarding!\nPlease make sure you enter the correct time format!"
+        },
+        "skip": {
+            "details": "> • Skips the current track.",
+            "desc": "Skips the current track.",
+            "skipped": "A track has been skipped!"
         }
     },
     "errors": {
         "init": "An error has occurred, please contact the developer with the error ID:",
-        "permViewChannel": "Missing VIEW CHANNEL permission for this channel"
+        "permViewChannel": "Missing `VIEW CHANNEL` permission for this channel"
     }
 }

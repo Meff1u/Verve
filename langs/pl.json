@@ -35,7 +35,13 @@
         "seek": {
             "details": "> • Przewija aktualnie grany utwór do podanego czasu.\n> • Przykładowe użycie: /seek 30s, /seek 2m, /seek 1m 35s",
             "desc": "Przewija aktualną piosenkę do podanego czasu.",
-            "forwarded": "Przewinięto do"
+            "forwarded": "Przewinięto do",
+            "error": "Błąd podczas przewijania!\nUpewnij się, że wpisałeś poprawny format czasu!"
+        },
+        "skip": {
+            "details": "> • Pomija aktualnie grany utwór.",
+            "desc": "Pomija aktualnie grany utwór.",
+            "skipped": "Utwór został pominięty!"
         }
     },
     "errors": {
