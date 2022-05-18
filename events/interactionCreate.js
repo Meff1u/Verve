@@ -36,7 +36,7 @@ module.exports = {
                 fs.writeFileSync('././fullqueue.txt', desc, (err) => {
                     if (err) throw err;
                 });
-                const txt = new MessageAttachment('../fullqueue.txt', 'fullqueue.txt');
+                const txt = new MessageAttachment('./fullqueue.txt', 'fullqueue.txt');
                 await interaction.reply({ files: [txt] });
                 interaction.message.edit({ components: [] });
             }
