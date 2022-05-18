@@ -7,7 +7,7 @@ module.exports = {
         .setDescription('Clears the queue and leaves the voice channel.'),
     async execute(interaction, gqueue, settings, lang) {
         await interaction.deferReply();
-        if (!gqueue || gqueue.songs.length === 0) {
+        if (!gqueue) {
             const embed = new MessageEmbed()
             .setTitle(lang.commands.queue.noQueue)
             .setColor('RED');
