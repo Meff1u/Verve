@@ -3,7 +3,17 @@ const { token } = require('./config.json');
 const fs = require('fs');
 const path = require('path');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MEMBERS] });
+
+const { Player } = require('discord-music-player');
+const player = new Player(client, {
+    leaveOnEmpty: false,
+    deafenOnJoin: true,
+    leaveOnEnd: false,
+    leaveOnStop: true,
+    timeout: 300,
+});
+client.player = player;
 
 client.commands = new Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -20,19 +30,12 @@ for (const file of eventFiles) {
     if (event.once) {
         client.once(event.name, (...args) => event.execute(...args));
     }
+    else if (event.player) {
+        player.on(event.name, (...args) => event.execute(...args));
+    }
     else {
         client.on(event.name, (...args) => event.execute(...args));
     }
 }
-
-const { Player } = require('discord-music-player');
-const player = new Player(client, {
-    leaveOnEmpty: true,
-    deafenOnJoin: true,
-    leaveOnEnd: false,
-    leaveOnStop: true,
-    timeout: 300,
-});
-client.player = player;
 
 client.login(token);

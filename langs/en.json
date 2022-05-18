@@ -42,10 +42,39 @@
             "details": "> • Skips the current track.",
             "desc": "Skips the current track.",
             "skipped": "A track has been skipped!"
+        },
+        "stop": {
+            "details": "> • Clears the queue and leaves the voice channel.",
+            "desc": "Clears the queue and leaves the voice channel.",
+            "cya": "Cya! 👋"
+        },
+        "bot": {
+            "details": "Displays detailed bot information such as statistics, host, versions, etc.",
+            "desc": "Informations about Verve.",
+            "title": "Informations about Verve",
+            "descID": "ID:",
+            "descAuthor": "Author:",
+            "descCreated": "Bot has been created:",
+            "fieldStatsName": "Statistics:",
+            "fieldStatsDescGuilds": "Guilds:",
+            "fieldStatsDescMembers": "Members:",
+            "fieldStatsDescCommands": "Commands:",
+            "fieldStatsDescPlayed": "Played songs:",
+            "fieldStatsDescPlayedServer": "This server:",
+            "fieldHostName": "Host:",
+            "fieldHostDescOS": "OS:",
+            "fieldHostDescRAM": "RAM Usage:",
+            "fieldHostDescCPU": "CPU Usage:",
+            "fieldHostDescUptime": "Uptime:",
+            "fieldHostDescPing": "Ping:",
+            "fieldVersionsName": "Versions:"  
         }
+    },
+    "events": {
+        "queueEnd": "No reaction for a long time, I'm leaving..."
     },
     "errors": {
         "init": "An error has occurred, please contact the developer with the error ID:",
-        "permViewChannel": "Missing `VIEW CHANNEL` permission for this channel"
+        "permViewChannel": "Missing `VIEW CHANNEL` permission for this channel!"
     }
 }

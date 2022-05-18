@@ -42,7 +42,36 @@
             "details": "> • Pomija aktualnie grany utwór.",
             "desc": "Pomija aktualnie grany utwór.",
             "skipped": "Utwór został pominięty!"
+        },
+        "stop": {
+            "details": "> • Usuwa kolejkę i wychodzi z kanału głosowego.",
+            "desc": "Usuwa kolejkę i wychodzi z kanału głosowego.",
+            "cya": "Do zobaczenia! 👋"
+        },
+        "bot": {
+            "details": "> • Wyświetla szczegółowe informacje o bocie takie jak statystyki, host, wersje, itp.",
+            "desc": "Informacje o Verve.",
+            "title": "Informacje o Verve",
+            "descID": "ID:",
+            "descAuthor": "Autor:",
+            "descCreated": "Bot został utworzony:",
+            "fieldStatsName": "Statystyki:",
+            "fieldStatsDescGuilds": "Serwery:",
+            "fieldStatsDescMembers": "Użytkownicy:",
+            "fieldStatsDescCommands": "Komendy:",
+            "fieldStatsDescPlayed": "Puszczone utwory:",
+            "fieldStatsDescPlayedServer": "Ten serwer:",
+            "fieldHostName": "Host:",
+            "fieldHostDescOS": "OS:",
+            "fieldHostDescRAM": "Zużycie RAM'u:",
+            "fieldHostDescCPU": "Zużycie CPU:",
+            "fieldHostDescUptime": "Czas pracy:",
+            "fieldHostDescPing": "Ping:",
+            "fieldVersionsName": "Wersje:"
         }
+    },
+    "events": {
+        "queueEnd": "Brak reakcji od dłuższego czasu, wychodzę..."
     },
     "errors": {
         "init": "Wystąpił błąd, skontaktuj się z deweloperem podając ID błędu:",

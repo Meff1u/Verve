@@ -16,31 +16,33 @@ module.exports = {
         }, 30000);
         await client.guilds.fetch();
         client.guilds.cache.forEach(async (g) => {
-            if (!fs.existsSync(`./guilds-data/${g.id}`)) {
+            if (!fs.existsSync(`././guilds-data/${g.id}`)) {
                 createConfig(g);
             }
+            await g.members.fetch();
         });
     },
 };
 
 function createConfig(guild) {
-    if (!fs.existsSync(`./guilds-data/${guild.id}`)) {
-        fs.mkdirSync(`./guilds-data/${guild.id}`);
-        console.log(`Stworzono folder konfiguracyjny dla: "${guild.name}"`);
+    if (!fs.existsSync(`././guilds-data/${guild.id}`)) {
+        fs.mkdirSync(`././guilds-data/${guild.id}`);
+        console.log(`📁 ${guild.name} 💬`);
     }
     else {
-        console.log(`Folder konfiguracyjny dla: "${guild.name}" istnieje, pomijam...`);
+        console.log(`📁 ${guild.name} ✅`);
     }
-    if (!fs.existsSync(`./guilds-data/${guild.id}/settings.json`)) {
-        fs.writeFileSync(`./guilds-data/${guild.id}/settings.json`, '{}');
-        console.log(`Stworzono plik ustawień dla: "${guild.name}"`);
-        const settings = require(`./guilds-data/${guild.id}/settings.json`);
+    if (!fs.existsSync(`././guilds-data/${guild.id}/settings.json`)) {
+        fs.writeFileSync(`././guilds-data/${guild.id}/settings.json`, '{}');
+        console.log(`⚙️ ${guild.name} 💬`);
+        const settings = require(`../guilds-data/${guild.id}/settings.json`);
         settings.lang = 'en';
-        fs.writeFileSync(`./guilds-data/${guild.id}/settings.json`, JSON.stringify(settings, null, 4), err => {
+        settings.stats = {};
+        fs.writeFileSync(`././guilds-data/${guild.id}/settings.json`, JSON.stringify(settings, null, 4), err => {
             if (err) throw err;
         });
     }
     else {
-        console.log(`Plik ustawień dla: "${guild.name}"" istnieje, pomijam...`);
+        console.log(`⚙️ ${guild.name} ✅`);
     }
 }

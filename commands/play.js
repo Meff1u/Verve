@@ -27,7 +27,9 @@ module.exports = {
                 gqueue = interaction.client.player.createQueue(interaction.guild.id, {
                     data: {
                         // eslint-disable-next-line comma-dangle
-                        channel: interaction.channel
+                        channel: interaction.channel,
+                        // eslint-disable-next-line comma-dangle
+                        initDJ: interaction.member
                     // eslint-disable-next-line comma-dangle
                     }
                 });

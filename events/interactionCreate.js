@@ -8,8 +8,8 @@ module.exports = {
         if (interaction.isCommand()) {
             const command = client.commands.get(interaction.commandName);
             if (!command) return;
-            const settings = require(`./guilds-data/${interaction.guild.id}/settings.json`);
-            const lang = require(`./langs/${settings.lang}.json`);
+            const settings = require(`../guilds-data/${interaction.guild.id}/settings.json`);
+            const lang = require(`../langs/${settings.lang}.json`);
             if (!interaction.channel.permissionsFor(interaction.guild.me).has(Permissions.FLAGS.VIEW_CHANNEL)) return await interaction.reply({ content: lang.errors.permViewChannel, ephemeral: true });
             try {
                 // eslint-disable-next-line prefer-const
@@ -33,10 +33,10 @@ module.exports = {
                 for (let i = 0; i < q.songs.length; i++) {
                     desc += `${i + 1}. ${q.songs[i].name} (${q.songs[i].requestedBy.user.tag})\n`;
                 }
-                fs.writeFileSync('fullqueue.txt', desc, (err) => {
+                fs.writeFileSync('././fullqueue.txt', desc, (err) => {
                     if (err) throw err;
                 });
-                const txt = new MessageAttachment('fullqueue.txt', 'fullqueue.txt');
+                const txt = new MessageAttachment('../fullqueue.txt', 'fullqueue.txt');
                 await interaction.reply({ files: [txt] });
                 interaction.message.edit({ components: [] });
             }
