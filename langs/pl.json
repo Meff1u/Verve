@@ -11,11 +11,12 @@
             "cTitle": "Komenda:"
         },
         "play": {
-            "details": "> • /play song <tytuł/link> pozwala na puszczenie konkretnej piosenki.\n> • /play playlist <link> pozwala na puszczenie całej playlisty.",
+            "details": "> • /play song <tytuł/link> pozwala na puszczenie konkretnego utworu.\n> • /play playlist <link> pozwala na puszczenie całej playlisty.",
             "desc": "Dodaje utwór lub playlistę do kolejki.",
             "sTitle1": "Teraz gram:",
             "sTitle2": "Dodano do kolejki:",
-            "sFooterPos": "Pozycja:",
+            "sFieldPos": "Pozycja:",
+            "sFieldDur": "Czas trwania:",
             "sFooterRequested": "Dodane przez:",
             "pTitle": "Dodano playlistę:",
             "pFooterSongs": "Utworów:",
@@ -34,7 +35,7 @@
         },
         "seek": {
             "details": "> • Przewija aktualnie grany utwór do podanego czasu.\n> • Przykładowe użycie: /seek 30s, /seek 2m, /seek 1m 35s",
-            "desc": "Przewija aktualną piosenkę do podanego czasu.",
+            "desc": "Przewija aktualny utwór do podanego czasu.",
             "forwarded": "Przewinięto do",
             "error": "Błąd podczas przewijania!\nUpewnij się, że wpisałeś poprawny format czasu!"
         },
@@ -68,6 +69,13 @@
             "fieldHostDescUptime": "Czas pracy:",
             "fieldHostDescPing": "Ping:",
             "fieldVersionsName": "Wersje:"
+        },
+        "loop": {
+            "details": "> • Zmienia tryb powtarzania dla kolejki.\n> • Opcja 'SONG' ustawia powtarzanie dla jednego, aktualnie grającego utworu.\n> • Opcja 'QUEUE' ustawia powtarzanie dla całej kolejki.\n> • Opcja 'OFF' wyłącza powtarzanie.",
+            "desc": "Zmienia tryb powtarzania.",
+            "modeSONG": "Tryb powtarzania został ustawiony na utwór!",
+            "modeQUEUE": "Tryb powtarzania został ustawiony na kolejkę!",
+            "modeOFF": "Tryb powtarzania został wyłączony!"
         }
     },
     "events": {

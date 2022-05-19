@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 module.exports = {
-    name: 'songAdd',
+    name: 'songChanged',
     player: true,
     async execute(queue) {
         const settings = require(`../guilds-data/${queue.guild.id}/settings.json`);

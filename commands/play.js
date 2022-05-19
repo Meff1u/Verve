@@ -52,7 +52,11 @@ module.exports = {
                 .setTitle(embedtitle)
                 .setDescription(`**[${song.name}](${song.url})**`)
                 .setThumbnail(song.thumbnail)
-                .setFooter({ text: `${lang.commands.play.sFooterPos} ${song.queue.songs.length} | ${lang.commands.play.sFooterRequested} ${song.requestedBy.user.tag}` })
+                .setFields(
+                    { name: lang.commands.play.sFieldPos, value: `> ${song.queue.songs.length}`, inline: true },
+                    { name: lang.commands.play.sFieldDur, value: `> ${song.duration}`, inline: true },
+                )
+                .setFooter({ text: `${lang.commands.play.sFooterRequested} ${song.requestedBy.user.tag}` })
                 .setColor('#AB40AF');
                 return await interaction.followUp({ embeds: [embed] });
             }

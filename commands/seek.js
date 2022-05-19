@@ -25,10 +25,18 @@ module.exports = {
         for (let i = 0; i < time.length; i++) {
             mstime += ms(time[i]);
         }
+        let uptime = '';
+        let tempms = mstime;
+        do {
+            const temp = `${ms(tempms, { long: true })}`;
+            tempms = tempms - ms(temp);
+            uptime += `${temp} `;
+        }
+        while (tempms > 999);
         try {
             await gqueue.seek(mstime);
             const embed = new MessageEmbed()
-            .setTitle(`✅ Forwared to ${ms(mstime, { long: true })}`)
+            .setTitle(`✅ ${lang.commands.seek.forwarded} ${uptime}`)
             .setColor('#AB40AF');
             return await interaction.followUp({ embeds: [embed] });
         }

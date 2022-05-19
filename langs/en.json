@@ -15,7 +15,8 @@
             "desc": "Adds a track or playlist to the queue.",
             "sTitle1": "Now playing:",
             "sTitle2": "Added to queue:",
-            "sFooterPos": "Position:",
+            "sFieldPos": "Position:",
+            "sFieldDur": "Duration:",
             "sFooterRequested": "Added by:",
             "pTitle": "Playlist added:",
             "pFooterSongs": "Songs:",
@@ -49,7 +50,7 @@
             "cya": "Cya! 👋"
         },
         "bot": {
-            "details": "Displays detailed bot information such as statistics, host, versions, etc.",
+            "details": "> • Displays detailed bot information such as statistics, host, versions, etc.",
             "desc": "Informations about Verve.",
             "title": "Informations about Verve",
             "descID": "ID:",
@@ -68,6 +69,13 @@
             "fieldHostDescUptime": "Uptime:",
             "fieldHostDescPing": "Ping:",
             "fieldVersionsName": "Versions:"  
+        },
+        "loop": {
+            "details": "> • Changes the loop mode of the queue.\n> • 'SONG' option sets the loop for one, currently playing song.\n> • 'QUEUE' option sets the loop for the whole queue.\n> • 'OFF' option disables loop.",
+            "desc": "Changes the loop mode.",
+            "modeSONG": "Loop mode has been set to song!",
+            "modeQUEUE": "Loop mode has been set to queue!",
+            "modeOFF": "Loop mode has been disabled!"
         }
     },
     "events": {
