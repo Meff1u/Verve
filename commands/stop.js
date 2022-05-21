@@ -7,6 +7,12 @@ module.exports = {
         .setDescription('Clears the queue and leaves the voice channel.'),
     async execute(interaction, gqueue, settings, lang) {
         await interaction.deferReply();
+        if (interaction.member.voice.channel !== interaction.guild.me.voice.channel) {
+            const embed = new MessageEmbed()
+            .setTitle(lang.errors.sameChannel)
+            .setColor('RED');
+            return await interaction.followUp({ embeds: [embed] });
+        }
         if (!gqueue) {
             const embed = new MessageEmbed()
             .setTitle(lang.commands.queue.noQueue)

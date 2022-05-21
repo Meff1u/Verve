@@ -62,6 +62,8 @@
             "fieldStatsDescCommands": "Commands:",
             "fieldStatsDescPlayed": "Played songs:",
             "fieldStatsDescPlayedServer": "This server:",
+            "fieldStatsDescPlaying": "Playing time:",
+            "fieldStatsDescPlayingServer": "This server:",
             "fieldHostName": "Host:",
             "fieldHostDescOS": "OS:",
             "fieldHostDescRAM": "RAM Usage:",
@@ -93,6 +95,18 @@
             "title": "Now playing:",
             "addedBy": "Added by:",
             "noPlaying": "Currently I am not playing any song!"
+        },
+        "resume": {
+            "details": "> • Resumes the song.",
+            "desc": "Resumes the song.",
+            "alreadyResumed": "The song is not paused!",
+            "resumed": "The song has been resumed!"
+        },
+        "pause": {
+            "details": "> • Pauses the song.",
+            "desc": "Pauses the song.",
+            "alreadyPaused": "The song is already paused!",
+            "paused": "The song has been paused!"
         }
     },
     "events": {
@@ -100,6 +114,7 @@
     },
     "errors": {
         "init": "An error has occurred, please contact the developer with the error ID:",
-        "permViewChannel": "Missing `VIEW CHANNEL` permission for this channel!"
+        "permViewChannel": "Missing `VIEW CHANNEL` permission for this channel!",
+        "sameChannel": "You must be on the same voice channel as me to use this command!"
     }
 }

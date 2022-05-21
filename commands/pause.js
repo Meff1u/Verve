@@ -3,8 +3,8 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('shuffle')
-        .setDescription('Shuffles the queue.'),
+        .setName('pause')
+        .setDescription('Pauses the song.'),
     async execute(interaction, gqueue, settings, lang) {
         await interaction.deferReply();
         if (interaction.member.voice.channel !== interaction.guild.me.voice.channel) {
@@ -20,9 +20,15 @@ module.exports = {
             return await interaction.followUp({ embeds: [embed] });
         }
         try {
-            await gqueue.shuffle();
+            if (gqueue.paused) {
+                const embed = new MessageEmbed()
+                .setTitle(lang.commands.pause.alredyPaused)
+                .setColor('RED');
+                return await interaction.followUp({ embeds: [embed] });
+            }
+            await gqueue.setPaused(true);
             const embed = new MessageEmbed()
-            .setTitle(`✅ ${lang.commands.shuffle.shuffled}`)
+            .setTitle(`⏸️ ${lang.commands.pause.paused}`)
             .setColor('#AB40AF');
             return await interaction.followUp({ embeds: [embed] });
         }

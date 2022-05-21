@@ -21,7 +21,6 @@ module.exports = {
                 .setRequired(true))),
     async execute(interaction, gqueue, settings, lang) {
         await interaction.deferReply();
-
         try {
             if (!gqueue) {
                 gqueue = interaction.client.player.createQueue(interaction.guild.id, {
@@ -33,6 +32,12 @@ module.exports = {
                     // eslint-disable-next-line comma-dangle
                     }
                 });
+            }
+            else if (interaction.member.voice.channel !== interaction.guild.me.voice.channel) {
+                const embed = new MessageEmbed()
+                .setTitle(lang.errors.sameChannel)
+                .setColor('RED');
+                return await interaction.followUp({ embeds: [embed] });
             }
 
             await gqueue.join(interaction.member.voice.channel);

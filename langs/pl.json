@@ -62,6 +62,8 @@
             "fieldStatsDescCommands": "Komendy:",
             "fieldStatsDescPlayed": "Puszczone utwory:",
             "fieldStatsDescPlayedServer": "Ten serwer:",
+            "fieldStatsDescPlaying": "Czas grania:",
+            "fieldStatsDescPlayingServer": "Ten serwer:",
             "fieldHostName": "Host:",
             "fieldHostDescOS": "OS:",
             "fieldHostDescRAM": "Zużycie RAM'u:",
@@ -93,6 +95,18 @@
             "title": "Teraz gram:",
             "addedBy": "Dodane przez:",
             "noPlaying": "Aktualnie nie gram żadnego utworu!"
+        },
+        "resume": {
+            "details": "> • Wznawia odtwarzanie utworu.",
+            "desc": "Wznawia odtwarzanie utworu.",
+            "alreadyResumed": "Odtwarzanie nie jest wstrzymane!",
+            "resumed": "Odtwarzanie zostało wznowione!"
+        },
+        "pause": {
+            "details": "> • Wstrzymuje odtwarzanie utworu.",
+            "desc": "Wstrzymuje odtwarzanie utworu.",
+            "alreadyPaused": "Odtwarzanie już jest wstrzymane!",
+            "paused": "Odtwarzanie zostało wstrzymane!"
         }
     },
     "events": {
@@ -100,6 +114,7 @@
     },
     "errors": {
         "init": "Wystąpił błąd, skontaktuj się z deweloperem podając ID błędu:",
-        "permViewChannel": "Brak permisji `WYŚWIETLANIE KANAŁU` na tym kanale!"
+        "permViewChannel": "Brak permisji `WYŚWIETLANIE KANAŁU` na tym kanale!",
+        "sameChannel": "Aby użyć tej komendy musisz być na tym samym kanale głosowym co ja!"
     }
 }
