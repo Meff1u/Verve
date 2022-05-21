@@ -76,6 +76,23 @@
             "modeSONG": "Tryb powtarzania został ustawiony na utwór!",
             "modeQUEUE": "Tryb powtarzania został ustawiony na kolejkę!",
             "modeOFF": "Tryb powtarzania został wyłączony!"
+        },
+        "clear": {
+            "details": "> • Czyści całą aktualną kolejkę.",
+            "desc": "Czyści kolejkę.",
+            "cleared": "Kolejka została wyczyszczona!"
+        },
+        "shuffle": {
+            "details": "> • Tasuje całą aktualną kolejkę.",
+            "desc": "Tasuje kolejkę.",
+            "shuffled": "Kolejka została potasowana!"
+        },
+        "np": {
+            "details": "> • Wyświetla aktualnie grany utwór.",
+            "desc": "Wyświetla aktualnie grany utwór.",
+            "title": "Teraz gram:",
+            "addedBy": "Dodane przez:",
+            "noPlaying": "Aktualnie nie gram żadnego utworu!"
         }
     },
     "events": {

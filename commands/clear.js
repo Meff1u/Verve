@@ -3,8 +3,8 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('skip')
-        .setDescription('Skips the current song.'),
+        .setName('clear')
+        .setDescription('Clears the queue.'),
     async execute(interaction, gqueue, settings, lang) {
         await interaction.deferReply();
         if (!gqueue || gqueue.songs.length === 0) {
@@ -14,9 +14,10 @@ module.exports = {
             return await interaction.followUp({ embeds: [embed] });
         }
         try {
+            await gqueue.clearQueue();
             await gqueue.skip();
             const embed = new MessageEmbed()
-            .setTitle(`✅ ${lang.commands.skip.skipped}`)
+            .setTitle(`✅ ${lang.commands.clear.cleared}`)
             .setColor('#AB40AF');
             return await interaction.followUp({ embeds: [embed] });
         }

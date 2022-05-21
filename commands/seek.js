@@ -6,7 +6,7 @@ const ms = require('ms');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('seek')
-        .setDescription('Seek the current track to the entered time.')
+        .setDescription('Seek the current song to the entered time.')
         .addStringOption(option => option
             .setName('time')
             .setDescription('E.g: 1m 20s')

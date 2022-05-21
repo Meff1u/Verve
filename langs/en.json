@@ -12,7 +12,7 @@
         },
         "play": {
             "details": "> • /play song <title/link> allows you to play a specific song.\n> • /play playlist <link> allows you to play the entire playlist.",
-            "desc": "Adds a track or playlist to the queue.",
+            "desc": "Adds a song or playlist to the queue.",
             "sTitle1": "Now playing:",
             "sTitle2": "Added to queue:",
             "sFieldPos": "Position:",
@@ -21,7 +21,7 @@
             "pTitle": "Playlist added:",
             "pFooterSongs": "Songs:",
             "noVC": "You must be in the voice channel!",
-            "noSong": "No such track found!",
+            "noSong": "No such song found!",
             "noPlaylist": "No such playlist found!",
             "vcError": "Error joining the voice channel!\n Make sure I have sufficient permissions!"
         },
@@ -34,15 +34,15 @@
             "more": "more"
         },
         "seek": {
-            "details": "> • Seek the current track to the entered time.\n> • Example usage: /seek 30s, /seek 2m, /seek 1m 35s",
-            "desc": "Seek the current track to the entered time.",
+            "details": "> • Seek the current song to the entered time.\n> • Example usage: /seek 30s, /seek 2m, /seek 1m 35s",
+            "desc": "Seek the current song to the entered time.",
             "forwarded": "Forwarded to",
             "error": "Error while forwarding!\nPlease make sure you enter the correct time format!"
         },
         "skip": {
-            "details": "> • Skips the current track.",
-            "desc": "Skips the current track.",
-            "skipped": "A track has been skipped!"
+            "details": "> • Skips the current song.",
+            "desc": "Skips the current song.",
+            "skipped": "A song has been skipped!"
         },
         "stop": {
             "details": "> • Clears the queue and leaves the voice channel.",
@@ -76,6 +76,23 @@
             "modeSONG": "Loop mode has been set to song!",
             "modeQUEUE": "Loop mode has been set to queue!",
             "modeOFF": "Loop mode has been disabled!"
+        },
+        "clear": {
+            "details": "> • Clears the entire current queue.",
+            "desc": "Clears the queue.",
+            "cleared": "The queue has been cleared!"
+        },
+        "shuffle": {
+            "details": "> • Shuffles the entire current queue.",
+            "desc": "Shuffles the queue.",
+            "shuffled": "The queue has been shuffled!"
+        },
+        "np": {
+            "details": "> • Displays the currently played song.",
+            "desc": "Displays the currently played song.",
+            "title": "Now playing:",
+            "addedBy": "Added by:",
+            "noPlaying": "Currently I am not playing any song!"
         }
     },
     "events": {

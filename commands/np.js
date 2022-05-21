@@ -3,21 +3,27 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('skip')
-        .setDescription('Skips the current song.'),
+        .setName('np')
+        .setDescription('Displays the currently played song.'),
     async execute(interaction, gqueue, settings, lang) {
         await interaction.deferReply();
-        if (!gqueue || gqueue.songs.length === 0) {
+        if (!gqueue || !gqueue.isPlaying) {
             const embed = new MessageEmbed()
-            .setTitle(lang.commands.queue.noQueue)
+            .setTitle(lang.commands.np.noPlaying)
             .setColor('RED');
             return await interaction.followUp({ embeds: [embed] });
         }
         try {
-            await gqueue.skip();
+            const progress = gqueue.createProgressBar({
+                arrow: '•',
+            });
+            console.log(progress);
             const embed = new MessageEmbed()
-            .setTitle(`✅ ${lang.commands.skip.skipped}`)
-            .setColor('#AB40AF');
+            .setTitle(lang.commands.np.title)
+            .setDescription(`**[${gqueue.nowPlaying.name}](${gqueue.nowPlaying.url})**\n\`${progress.prettier}\``)
+            .setColor('#AB40AF')
+            .setFooter({ text: `${lang.commands.np.addedBy} ${gqueue.nowPlaying.requestedBy.user.tag}` })
+            .setThumbnail(gqueue.nowPlaying.thumbnail);
             return await interaction.followUp({ embeds: [embed] });
         }
         catch (e) {
