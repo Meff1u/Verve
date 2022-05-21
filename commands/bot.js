@@ -36,6 +36,8 @@ module.exports = {
             ptime += `${temp} `;
         }
         while (temptimestamp > 59999);
+        const execSync = require('child_process').execSync;
+        const ffmpegver = execSync('ffmpeg -version', { encoding: 'utf-8' }).split(' ')[2];
         const embed = new MessageEmbed()
         .setTitle(lang.commands.bot.title)
         .setDescription(`• ${lang.commands.bot.descID} **${interaction.client.user.id}**\n• ${lang.commands.bot.descAuthor} **${package.author}**\n• ${lang.commands.bot.descCreated} **<t:${Math.round(interaction.client.user.createdTimestamp / 1000)}:R>**`)
@@ -44,7 +46,7 @@ module.exports = {
         .setFields(
             { name: lang.commands.bot.fieldStatsName, value: `> ${lang.commands.bot.fieldStatsDescGuilds} **${interaction.client.guilds.cache.size}**\n> ${lang.commands.bot.fieldStatsDescMembers} **${interaction.client.users.cache.size}**\n> ${lang.commands.bot.fieldStatsDescCommands} **${commands.size}**\n> ${lang.commands.bot.fieldStatsDescPlayed} **${gdata.songsPlayed}**\n> ⮡ ${lang.commands.bot.fieldStatsDescPlayedServer} **${settings.stats.songsPlayed}** (${Math.round((settings.stats.songsPlayed / gdata.songsPlayed) * 100)}%)\n> ${lang.commands.bot.fieldStatsDescPlaying} **${gptime}**\n> ⮡ ${lang.commands.bot.fieldStatsDescPlayingServer} **${ptime}** (${Math.round((settings.stats.minutesOnVC / gdata.minutesOnVC) * 100)}%)` },
             { name: lang.commands.bot.fieldHostName, value: `> ${lang.commands.bot.fieldHostDescOS} **${process.platform}**\n> ${lang.commands.bot.fieldHostDescRAM} **${((os.totalmem() - os.freemem()) / 1024 / 1024 / 1024).toFixed(2)}/${(os.totalmem() / 1024 / 1024 / 1024).toFixed(2)} GB** (${Math.floor(((os.totalmem() - os.freemem()) / os.totalmem()) * 100)}%)\n> ${lang.commands.bot.fieldHostDescCPU} **${(process.cpuUsage().user / 1024 / 1024).toFixed(2)} MB** (${os.cpus().length} cores)\n> ${lang.commands.bot.fieldHostDescUptime} **${uptime}**\n> ${lang.commands.bot.fieldHostDescPing} **${Math.round(interaction.client.ws.ping)}ms**` },
-            { name: lang.commands.bot.fieldVersionsName, value: `> Verve: **${package.version}**\n> Node.js: **${process.versions.node}**\n> Discord.js: **${package.dependencies['discord.js'].replace('^', '')}**` },
+            { name: lang.commands.bot.fieldVersionsName, value: `> Verve: **${package.version}**\n> Node.js: **${process.versions.node}**\n> Discord.js: **${package.dependencies['discord.js'].replace('^', '')}**\n> discord-music-player: **${package.dependencies['discord-music-player'].replace('^', '')}**\n> FFMPEG: **${ffmpegver}**` },
         );
         await interaction.followUp({ embeds: [embed] });
     },
