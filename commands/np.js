@@ -21,7 +21,9 @@ module.exports = {
         }
         try {
             const progress = gqueue.createProgressBar({
-                arrow: '•',
+                arrow: '🔘',
+                size: 30,
+                block: '▬',
             });
             const embed = new MessageEmbed()
             .setTitle(lang.commands.np.title)
