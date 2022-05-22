@@ -23,7 +23,7 @@ module.exports = {
         try {
             const language = interaction.options.getString('lang');
             settings.lang = language;
-            fs.writeFileSync(`././guilds=data/${interaction.guild.id}/settings.json`, JSON.stringify(settings, null, 4), err => {
+            fs.writeFileSync(`././guilds-data/${interaction.guild.id}/settings.json`, JSON.stringify(settings, null, 4), err => {
                 if (err) throw err;
             });
             const lang2 = require(`../langs/${language}.json`);
