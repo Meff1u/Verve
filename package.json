@@ -1,6 +1,6 @@
 {
   "name": "verve-2",
-  "version": "2.0.8c",
+  "version": "2.0.9",
   "description": "Rebuild of Verve - music bot",
   "main": "index.js",
   "scripts": {

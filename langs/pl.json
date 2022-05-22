@@ -115,6 +115,8 @@
     "errors": {
         "init": "Wystąpił błąd, skontaktuj się z deweloperem podając ID błędu:",
         "permViewChannel": "Brak permisji `WYŚWIETLANIE KANAŁU` na tym kanale!",
-        "sameChannel": "Aby użyć tej komendy musisz być na tym samym kanale głosowym co ja!"
-    }
+        "sameChannel": "Aby użyć tej komendy musisz być na tym samym kanale głosowym co ja!",
+        "noADM": "Aby użyć tej komendy musisz mieć permisję `ADMINISTRATORA`!"
+    },
+    "langChange": "Pomyślnie zmieniono język na Polski! 🇵🇱"
 }

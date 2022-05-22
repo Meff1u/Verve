@@ -115,6 +115,8 @@
     "errors": {
         "init": "An error has occurred, please contact the developer with the error ID:",
         "permViewChannel": "Missing `VIEW CHANNEL` permission for this channel!",
-        "sameChannel": "You must be on the same voice channel as me to use this command!"
-    }
+        "sameChannel": "You must be on the same voice channel as me to use this command!",
+        "noADM": "You must have the `ADMINISTRATOR` permissions to use this command!"
+    },
+    "langChange": "Successfully changed language to English! 🇬🇧"
 }

@@ -33,6 +33,9 @@ for (const file of eventFiles) {
     else if (event.player) {
         player.on(event.name, (...args) => event.execute(...args));
     }
+    else if (event.process) {
+        process.on(event.name, (...args) => event.execute(...args));
+    }
     else {
         client.on(event.name, (...args) => event.execute(...args));
     }
