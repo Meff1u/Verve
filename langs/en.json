@@ -107,6 +107,10 @@
             "desc": "Pauses the song.",
             "alreadyPaused": "The song is already paused!",
             "paused": "The song has been paused!"
+        },
+        "language": {
+            "details": "> • Changes the bot language.\n> • Available languages:\n> • 🇬🇧 English\n> • 🇵🇱 Polish",
+            "desc": "Changes the bot language."
         }
     },
     "events": {

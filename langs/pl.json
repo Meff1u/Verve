@@ -107,6 +107,10 @@
             "desc": "Wstrzymuje odtwarzanie utworu.",
             "alreadyPaused": "Odtwarzanie już jest wstrzymane!",
             "paused": "Odtwarzanie zostało wstrzymane!"
+        },
+        "language": {
+            "details": "> • Zmienia język bota.\n> • Dostępne języki:\n> • 🇬🇧 Angielski\n> • 🇵🇱 Polski",
+            "desc": "Zmienia język bota."
         }
     },
     "events": {
