@@ -1,0 +1,70 @@
+{
+    "title": "Polski (Polish)",
+    "common": {
+        "noPermission": "Brak permisji.",
+        "error": "Wystąpił błąd, jeśli będzie się on powtarzać, skontaktuj się z supportem!",
+        "thisShouldNeverHappen": "To nigdy nie powinno się zdarzyć!"
+    },
+    "events": {
+        "interactionCreate": {
+            "cooldownMessage": "Za szybko! Możesz użyć tej komendy ponownie {remaining}."
+        }
+    },
+    "commands": {
+        "ping": {
+            "detailedDescription": "Sprawdza opóźnienie bota i API Discorda.",
+            "pinging": "Pingowanie..."
+        },
+        "language": {
+            "detailedDescription": "Służy do zmiany języka interfejsu bota. Nie ma twojego języka? [Spraw, aby był](https://crowdin.com/project/verve)!",
+            "chooseLanguage": "Wybierz język:",
+            "languageChanged": "🇵🇱 Pomyślnie zmieniono język na Polski!"
+        },
+        "start": {
+            "detailedDescription": "Tworzy menu odtwarzacza z przyciskami do sterowania muzyką. Kliknij **Przyciski odtwarzacza**, aby dowiedzieć się więcej.",
+            "readyToPlay": "Gotowy by grać!",
+            "readyDescription": "Możesz sterować muzyką za pomocą poniższych przycisków.",
+            "needToJoinVC": "Najpierw musisz dołączyć do kanału głosowego!",
+            "alreadyActive": "Odtwarzacz jest już aktywny na tym serwerze!"
+        },
+        "help": {
+            "detailedDescription": "Wszystkie najważniejsze informacje o bocie, jego komendach i sposobie użycia.",
+            "buttonTitle": "Przyciski odtwarzacza",
+            "buttonDescription": "<:shuffle:1231762078105210890> - Mieszanie całej kolejki\n<:back:1231557341292531762> - Cofanie do poprzedniego utworu\n<:pause:1231557859427483729> - Wstrzymywanie odtwarzania\n<:resume:1231557502085234708> - Wznawianie odtwarzania\n<:skip:1231557748408324149> - Pomijanie aktualnego utworu\n<:loopoff:1231679789610438717> - Przełączanie trybu pętli (Wyłączony)\n  - <:loopone:1231680660398411917> (Pojedyńczy)\n  - <:loopqueue:1231686905226199050> (Kolejka)\n<:seek:1231764685850808371> - Przejwijanie utworu do określonego czasu w sekundach\n<:clean:1231692071006638130> - Czyszczenie całej kolejki\n<:lyrics:1231766872693932114> - Wyszukiwanie tekstu utworu\n<:queue:1231681055937925231> - Wyświetlanie aktualnej kolejki\n  - <:left:1231947323379159081><:right:1231947324717137982> - Przewijanie stron kolejki\n  - <:jump:1231766273386348604> - Przeskakiwanie do konkretnego utworu w kolejce\n  - <:remove:1231949687284826203> - Usuwanie konkretnego utworu z kolejki\n<:stop:1231643913060880528> - Zakończenie sesji odtwarzania\n<:add:1231561324329177129> - Dodawanie utworu/playlisty do kolejki\n<:search:1231763436049010760> - Wyszukiwanie utworu",
+            "commandsTitle": "Lista komend",
+            "aboutTitle": "O bocie/Statystyki"
+        }
+    },
+    "music": {
+        "noActiveQueue": "Nie ma aktywnej kolejki, utwórz ją za pomocą /start",
+        "wrongMenuPlayer": "To nie jest aktywne menu odtwarzacza.",
+        "addModalTitle": "Dodawanie utworu do kolejki",
+        "addModalDescription": "Wprowadź nazwę utworu lub adres URL",
+        "addModalPlaceholder": "Nazwa utworu lub adres URL",
+        "paused": "Wstrzymano odtwarzacz.",
+        "resumed": "Wznowiono odtwarzacz.",
+        "noPlaybackHistory": "Nie ma historii odtwarzania, więc nie mogę wrócić do poprzedniego utworu.",
+        "previousSong": "Wrócono do poprzedniego utworu.",
+        "skipped": "Pominięto bieżący utwór.",
+        "loopSingle": "Tryb pętli jest teraz włączony (Pojedyńczy).",
+        "loopQueue": "Tryb pętli jest teraz włączony (Kolejka)",
+        "loopDisabled": "Tryb pętli jest teraz wyłączony.",
+        "addedToQueue": "Dodano **{track}** do kolejki!",
+        "noResults": "Nie znaleziono żadnych wyników.",
+        "shuffled": "Kolejka została wymieszana.",
+        "shuffleError": "Kolejka jest zbyt krótka, aby ją wymieszać.",
+        "seekModalTitle": "Przewijanie utworu",
+        "seekModalDescription": "Wprowadź czas w sekundach, do którego chcesz przewinąć utwór.",
+        "seeked": "Przewinięto utwór do {time}s.",
+        "outOfSpace": "Nie ma już miejsca w kolejce, aby dodać ten utwór.",
+        "noTrackToSkip": "Nie ma utworu do pominięcia.",
+        "emptyQueue": "Kolejka jest pusta.",
+        "queueMenuTitle": "Kolejka dla {guildname}",
+        "page": "Strona",
+        "addedBy": "Dodane przez",
+        "songsInQueue": "Utwory w kolejce",
+        "pausedTitle": "Wstrzymano:",
+        "nowPlayingTitle": "Teraz odtwarzane:",
+        "arbitraryTitle": "Na żywo:"
+    }
+}

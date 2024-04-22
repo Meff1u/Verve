@@ -1,10 +1,4 @@
-config.json
 node_modules
-.eslintrc.json
-Verve 2.code-workspace
-deploy.js
 package-lock.json
-guilds-data
-fullqueue.txt
-global-data
-global-data/data.json
+datas
+src/config.js

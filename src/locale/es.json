@@ -1,0 +1,70 @@
+{
+    "title": "Español (Spanish)",
+    "common": {
+        "noPermission": "No tienes permiso para ejecutar este comando.",
+        "error": "Ocurrió un error, si esto se repite, ¡contacta con soporte!",
+        "thisShouldNeverHappen": "¡Esto no debería pasar nunca!"
+    },
+    "events": {
+        "interactionCreate": {
+            "cooldownMessage": "¡Muy rápido! Puedes usar ese comando de nuevo {remaining}."
+        }
+    },
+    "commands": {
+        "ping": {
+            "detailedDescription": "Muestra la latencia de la API del bot y de Discord.",
+            "pinging": "Pingueando..."
+        },
+        "language": {
+            "detailedDescription": "Cambia el idioma de la interfaz del bot. ¿No ves tu idioma? [¡Asegúrate de que esté allí!](https://crowdin.com/project/verve)",
+            "chooseLanguage": "Elige lengua:",
+            "languageChanged": "🇪🇸 ¡Idioma cambiado con éxito a Español!"
+        },
+        "start": {
+            "detailedDescription": "Crea un menú de reproductor con botones para controlar la música. Haz clic en **Botones del reproductor** para obtener más información.",
+            "readyToPlay": "¡Listo para tocar!",
+            "readyDescription": "Puedes controlar la música con los botones de abajo.",
+            "needToJoinVC": "¡Primero debes unirte a un canal de voz!",
+            "alreadyActive": "¡El reproductor ya está activo en este servidor!",
+            "commandsTitle": "Lista de comandos",
+            "aboutTitle": "Acerca de y Estadísticas"
+        },
+        "help": {
+            "detailedDescription": "Toda la información importante sobre el bot, sus comandos y cómo usarlo.",
+            "buttonTitle": "Botones del reproductor",
+            "buttonDescription": "<:shuffle:1231762078105210890> - Mezclar toda la cola\n<:back:1231557341292531762> - Volver a la canción anterior\n<:pause:1231557859427483729> - Pausar el reproductor\n<:resume:1231557502085234708> - Reanudar el reproductor\n<:skip:1231557748408324149> - Saltar la canción actual\n<:loopoff:1231679789610438717> - Alternar modo de bucle (Desactivado)\n  - <:loopone:1231680660398411917> (Único)\n  - <:loopqueue:1231686905226199050> (Cola)\n<:seek:1231764685850808371> - Avanzar a una posición en la canción en segundos\n<:clean:1231692071006638130> - Limpiar toda la cola\n<:lyrics:1231766872693932114> - Buscar letras de canciones\n<:queue:1231681055937925231> - Mostrar la cola actual\n  - <:left:1231947323379159081><:right:1231947324717137982> - Desplazarse por las páginas de la cola\n  - <:jump:1231766273386348604> - Saltar a una canción específica en la cola\n  - <:remove:1231949687284826203> - Eliminar una canción específica de la cola\n<:stop:1231643913060880528> - Detener la sesión de reproducción\n<:add:1231561324329177129> - Añadir una canción/lista de reproducción a la cola\n<:search:1231763436049010760> - Buscar una canción"
+        }
+    },
+    "music": {
+        "noActiveQueue": "¡No hay una cola activa, crea una con /start!",
+        "wrongMenuPlayer": "¡Este no es el menú activo del reproductor!",
+        "addModalTitle": "Añadir canción a la cola",
+        "addModalDescription": "Introduce el nombre de la canción o la URL",
+        "addModalPlaceholder": "Nombre de la canción o URL",
+        "paused": "¡Reproductor pausado!",
+        "resumed": "¡Reproductor reanudado!",
+        "noPlaybackHistory": "No hay historial de reproducción, así que no puedo volver a la canción anterior.",
+        "previousSong": "¡Vuelta a la canción anterior!",
+        "skipped": "¡Canción omitida!",
+        "loopSingle": "¡Modo de bucle activado (único)!",
+        "loopQueue": "¡Modo de bucle activado (cola)!",
+        "loopDisabled": "¡Modo de bucle desactivado!",
+        "addedToQueue": "¡**{track}** añadido a la cola!",
+        "noResults": "¡No se encontraron resultados!",
+        "shuffled": "¡Cola mezclada!",
+        "shuffleError": "¡La cola es demasiado corta para mezclarla!",
+        "seekModalTitle": "Avance rápido la canción",
+        "seekModalDescription": "Introduce el tiempo en segundos al que quieres saltar en la canción.",
+        "seeked": "¡Canción saltó a {time}s!",
+        "outOfSpace": "¡No hay espacio en la cola para añadir esta canción!",
+        "noTrackToSkip": "¡No hay canción para saltar!",
+        "emptyQueue": "¡Cola vacía!",
+        "queueMenuTitle": "Cola para {guildname}",
+        "page": "Página",
+        "addedBy": "Añadido por",
+        "songsInQueue": "Canciones en cola",
+        "pausedTitle": "Pausado:",
+        "nowPlayingTitle": "Reproduciendo ahora:",
+        "arbitraryTitle": "Transmisión en vivo:"
+    }
+}

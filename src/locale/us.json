@@ -1,0 +1,70 @@
+{
+    "title": "English",
+    "common": {
+        "noPermission": "No permission.",
+        "error": "An error has occurred, if this continues, contact support!",
+        "thisShouldNeverHappen": "This should never happen!"
+    },
+    "events": {
+        "interactionCreate": {
+            "cooldownMessage": "Too fast! You can use that command again {remaining}."
+        }
+    },
+    "commands": {
+        "ping": {
+            "detailedDescription": "Shows the bot's and Discord's API latency.",
+            "pinging": "Pinging..."
+        },
+        "language": {
+            "detailedDescription": "Changes the bot's interface language. Don't see your language? [Make sure it's there](https://crowdin.com/project/verve)!",
+            "chooseLanguage": "Choose language:",
+            "languageChanged": "🇺🇸 Successfully changed the language to English!"
+        },
+        "start": {
+            "detailedDescription": "Creates a player menu with buttons to control the music. Click **Player buttons** to learn more.",
+            "readyToPlay": "Ready to play!",
+            "readyDescription": "You can control the music using the buttons below.",
+            "needToJoinVC": "You need to join a voice channel first!",
+            "alreadyActive": "The player is already active on this server!"
+        },
+        "help": {
+            "detailedDescription": "All the important information about the bot, its commands and how to use it.",
+            "buttonTitle": "Player buttons",
+            "buttonDescription": "<:shuffle:1231762078105210890> - Shuffle the whole queue\n<:back:1231557341292531762> - Go back to the previous song\n<:pause:1231557859427483729> - Pause the player\n<:resume:1231557502085234708> - Resume the player\n<:skip:1231557748408324149> - Skip the current song\n<:loopoff:1231679789610438717> - Toggle loop mode (Off)\n   • <:loopone:1231680660398411917> (Single)\n   • <:loopqueue:1231686905226199050> (Queue)\n<:seek:1231764685850808371> - Seek to a position in the song in seconds\n<:clean:1231692071006638130> - Clean the whole queue\n<:lyrics:1231766872693932114> - Search for song lyrics\n<:queue:1231681055937925231> - Display the current queue\n   • <:left:1231947323379159081><:right:1231947324717137982> - Scroll through queue pages\n   • <:jump:1231766273386348604> - Jump to a specific song in the queue\n   • <:remove:1231949687284826203> - Remove a specific song from the queue\n<:stop:1231643913060880528> - Stop the playback session\n<:add:1231561324329177129> - Add a song/playlist to the queue\n<:search:1231763436049010760> - Search for a song",
+            "commandsTitle": "Commands list",
+            "aboutTitle": "About and Statistics"
+        }
+    },
+    "music": {
+        "noActiveQueue": "There's no active queue, create one by using /start",
+        "wrongMenuPlayer": "This is not active menu player.",
+        "addModalTitle": "Add a song to the queue",
+        "addModalDescription": "Enter the song name or URL",
+        "addModalPlaceholder": "Song name or URL",
+        "paused": "Paused the player.",
+        "resumed": "Resumed the player.",
+        "noPlaybackHistory": "There's no playback history, so I can't go back to the previous song.",
+        "previousSong": "The previous song is back.",
+        "skipped": "Skipped the current song.",
+        "loopSingle": "Loop mode is now enabled (Single).",
+        "loopQueue": "Loop mode is now enabled (Queue).",
+        "loopDisabled": "Loop mode is now disabled.",
+        "addedToQueue": "Added **{track}** to the queue!",
+        "noResults": "No results found.",
+        "shuffled": "Shuffled the queue.",
+        "shuffleError": "Queue is too short to shuffle.",
+        "seekModalTitle": "Seek to a position",
+        "seekModalDescription": "Skip amount of time in seconds in the song.",
+        "seeked": "Seeked to {time}s.",
+        "outOfSpace": "Max capacity reached for tracks queue",
+        "noTrackToSkip": "There's no track to skip.",
+        "emptyQueue": "Queue is empty.",
+        "queueMenuTitle": "Queue for {guildname}",
+        "page": "Page",
+        "addedBy": "Added by",
+        "songsInQueue": "Songs in queue",
+        "pausedTitle": "Paused:",
+        "nowPlayingTitle": "Now playing:",
+        "arbitraryTitle": "Livestream:"
+    }
+}

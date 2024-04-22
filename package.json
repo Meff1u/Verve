@@ -1,39 +1,34 @@
 {
-  "name": "verve-2",
-  "version": "2.0.9b",
-  "description": "Rebuild of Verve - music bot",
+  "name": "verve",
+  "version": "3.0.0-pre1",
+  "description": "Verve - Your favourite music tool",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Mefuuu/Verve.git"
+    "start": "node index.js"
   },
   "keywords": [
     "discord",
     "music",
-    "bot",
-    "player",
-    "youtube",
-    "spotify"
+    "bot"
   ],
-  "author": "Meffiu#9999",
+  "author": "meffiu",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Mefuuu/Verve/issues"
-  },
-  "homepage": "https://github.com/Mefuuu/Verve#readme",
   "dependencies": {
-    "@discordjs/opus": "^0.7.0",
-    "@discordjs/rest": "^0.4.1",
-    "discord-music-player": "^8.3.2",
-    "discord.js": "^13.6.0",
-    "ms": "^2.1.3",
-    "path": "^0.12.7",
-    "translate": "^1.4.1"
+    "@discord-player/extractor": "^4.4.7",
+    "@discordjs/voice": "^0.16.1",
+    "discord-player": "^6.6.8",
+    "discord.js": "^14.14.1",
+    "duration-time-conversion": "^1.0.6",
+    "express": "^4.19.2",
+    "ffmpeg-static": "^5.2.0",
+    "fs": "^0.0.1-security",
+    "mediaplex": "^0.0.9",
+    "moment": "^2.30.1",
+    "react": "^18.2.0",
+    "string-progressbar": "^1.0.4",
+    "youtube-ext": "^1.1.23"
   },
-  "devDependencies": {
-    "eslint": "^8.15.0"
+  "engines": {
+    "node": ">=16.11.0"
   }
 }
