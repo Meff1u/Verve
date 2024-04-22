@@ -25,14 +25,14 @@
             "readyToPlay": "¡Listo para tocar!",
             "readyDescription": "Puedes controlar la música con los botones de abajo.",
             "needToJoinVC": "¡Primero debes unirte a un canal de voz!",
-            "alreadyActive": "¡El reproductor ya está activo en este servidor!",
-            "commandsTitle": "Lista de comandos",
-            "aboutTitle": "Acerca de y Estadísticas"
+            "alreadyActive": "¡El reproductor ya está activo en este servidor!"
         },
         "help": {
             "detailedDescription": "Toda la información importante sobre el bot, sus comandos y cómo usarlo.",
             "buttonTitle": "Botones del reproductor",
-            "buttonDescription": "<:shuffle:1231762078105210890> - Mezclar toda la cola\n<:back:1231557341292531762> - Volver a la canción anterior\n<:pause:1231557859427483729> - Pausar el reproductor\n<:resume:1231557502085234708> - Reanudar el reproductor\n<:skip:1231557748408324149> - Saltar la canción actual\n<:loopoff:1231679789610438717> - Alternar modo de bucle (Desactivado)\n  - <:loopone:1231680660398411917> (Único)\n  - <:loopqueue:1231686905226199050> (Cola)\n<:seek:1231764685850808371> - Avanzar a una posición en la canción en segundos\n<:clean:1231692071006638130> - Limpiar toda la cola\n<:lyrics:1231766872693932114> - Buscar letras de canciones\n<:queue:1231681055937925231> - Mostrar la cola actual\n  - <:left:1231947323379159081><:right:1231947324717137982> - Desplazarse por las páginas de la cola\n  - <:jump:1231766273386348604> - Saltar a una canción específica en la cola\n  - <:remove:1231949687284826203> - Eliminar una canción específica de la cola\n<:stop:1231643913060880528> - Detener la sesión de reproducción\n<:add:1231561324329177129> - Añadir una canción/lista de reproducción a la cola\n<:search:1231763436049010760> - Buscar una canción"
+            "buttonDescription": "<:shuffle:1231762078105210890> - Mezclar toda la cola\n<:back:1231557341292531762> - Volver a la canción anterior\n<:pause:1231557859427483729> - Pausar el reproductor\n<:resume:1231557502085234708> - Reanudar el reproductor\n<:skip:1231557748408324149> - Saltar la canción actual\n<:loopoff:1231679789610438717> - Alternar modo de bucle (Desactivado)\n  - <:loopone:1231680660398411917> (Único)\n  - <:loopqueue:1231686905226199050> (Cola)\n<:seek:1231764685850808371> - Avanzar a una posición en la canción en segundos\n<:clean:1231692071006638130> - Limpiar toda la cola\n<:lyrics:1231766872693932114> - Buscar letras de canciones\n<:queue:1231681055937925231> - Mostrar la cola actual\n  - <:left:1231947323379159081><:right:1231947324717137982> - Desplazarse por las páginas de la cola\n  - <:jump:1231766273386348604> - Saltar a una canción específica en la cola\n  - <:remove:1231949687284826203> - Eliminar una canción específica de la cola\n<:stop:1231643913060880528> - Detener la sesión de reproducción\n<:add:1231561324329177129> - Añadir una canción/lista de reproducción a la cola\n<:search:1231763436049010760> - Buscar una canción",
+            "commandsTitle": "Lista de comandos",
+            "aboutTitle": "Acerca de y Estadísticas"
         }
     },
     "music": {
