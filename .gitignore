@@ -1,4 +1,4 @@
 node_modules
 package-lock.json
 datas
-src/config.js
+.priettierrc.json
