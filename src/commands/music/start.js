@@ -38,6 +38,7 @@ const slash = {
         await interaction.editReply({ embeds: [embedMenu], components: [menuRow2] }).then(async (msg) => {
           guildData.playerChannel = interaction.channel.id;
           guildData.playerMessage = msg.id;
+          queue.playerMessage = msg;
           writeFileSync(`./src/datas/guilds/${interaction.guildId}/data.json`, JSON.stringify(guildData, null, 2));
         });
       } catch (e) {

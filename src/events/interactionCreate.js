@@ -12,6 +12,9 @@ const {
 const config = require('../config');
 const { writeFileSync } = require('fs');
 const { useQueue, useHistory, QueueRepeatMode } = require('discord-player');
+const Genius = require('genius-lyrics');
+const { geniusKey } = require('../config');
+const gClient = new Genius.Client(geniusKey);
 
 module.exports = {
   name: Events.InteractionCreate,
@@ -76,6 +79,10 @@ module.exports = {
             `./src/datas/guilds/${interaction.guild.id}/data.json`,
             JSON.stringify(guildData, null, 2)
           );
+
+          const queue = useQueue(interaction.guild.id);
+          if (queue) queue.options.metadata.lang = lang;
+
           const e = new EmbedBuilder()
             .setColor('#00ff00')
             .setDescription(`**${lang.commands.language.languageChanged}**`);
@@ -254,6 +261,7 @@ module.exports = {
               content: lang.music.shuffled,
               ephemeral: true
             });
+            client.updateCurrentMenu(queue, false);
             break;
           case 'm.seek':
             const seekModal = new ModalBuilder()
@@ -271,6 +279,40 @@ module.exports = {
             seekModal.addComponents(modalRowSeek);
 
             await interaction.showModal(seekModal);
+            break;
+          case 'm.jump':
+            const jumpModal = new ModalBuilder()
+              .setCustomId('m.jumpModal')
+              .setTitle(lang.music.jumpModalTitle);
+
+            const inputJump = new TextInputBuilder()
+              .setCustomId('m.jumpModalInput')
+              .setLabel(lang.music.jumpModalDescription)
+              .setRequired(true)
+              .setPlaceholder('5')
+              .setStyle(TextInputStyle.Short);
+
+            const modalRowJump = new ActionRowBuilder().addComponents(inputJump);
+            jumpModal.addComponents(modalRowJump);
+
+            await interaction.showModal(jumpModal);
+            break;
+          case 'm.remove':
+            const removeModal = new ModalBuilder()
+              .setCustomId('m.removeModal')
+              .setTitle(lang.music.removeModalTitle);
+
+            const inputRemove = new TextInputBuilder()
+              .setCustomId('m.removeModalInput')
+              .setLabel(lang.music.removeModalDescription)
+              .setRequired(true)
+              .setPlaceholder('6')
+              .setStyle(TextInputStyle.Short);
+
+            const modalRowRemove = new ActionRowBuilder().addComponents(inputRemove);
+            removeModal.addComponents(modalRowRemove);
+
+            await interaction.showModal(removeModal);
             break;
           case 'm.queue':
             queue.queueInt = interaction;
@@ -292,10 +334,34 @@ module.exports = {
             client.updateCurrentMenu(queue, false, `queue-${queue.queuePage}`);
             break;
           case 'm.stop':
-            await queue.node.stop();
             await queue.delete();
             const pChannel = interaction.guild.channels.cache.get(guildData.playerChannel);
             await pChannel.messages.fetch(guildData.playerMessage).then((msg) => msg.delete());
+            break;
+          case 'm.clean':
+            await queue.node.stop();
+            client.updateCurrentMenu(queue, false, 'finish');
+            break;
+          case 'm.lyrics':
+            const searchResults = await gClient.songs.search(`${queue.currentTrack.title} ${queue.currentTrack.author}`);
+            const lyrics = await searchResults[0]?.lyrics();
+            if (lyrics && searchResults[0]) {
+              queue.lyrics = lyrics;
+              queue.lyricsTrack = queue.currentTrack.id;
+              interaction.deferUpdate();
+              client.updateCurrentMenu(queue, false);
+            } else {
+              await interaction.reply({
+                content: lang.music.noLyricsFound,
+                ephemeral: true
+              });
+            }
+            break;
+          case 'm.lyricsoff':
+            delete queue.lyrics;
+            delete queue.lyricsTrack;
+            interaction.deferUpdate();
+            client.updateCurrentMenu(queue, false);
             break;
           default:
             await interaction.reply({
@@ -371,6 +437,60 @@ module.exports = {
             content: client.repVars(lang.music.seeked, { time: seekTime }),
             ephemeral: true
           });
+        } catch (e) {
+          console.log(e);
+          return interaction.editReply({
+            content: lang.common.error,
+            ephemeral: true
+          });
+        }
+      } else if (interaction.customId == 'm.jumpModal') {
+        await interaction.deferReply({ ephemeral: true });
+        const jumpPosition = parseInt(interaction.fields.getTextInputValue('m.jumpModalInput'));
+        const queue = useQueue(interaction.guild.id);
+        if (!queue)
+          return interaction.reply({
+            content: lang.common.error,
+            ephemeral: true
+          });
+        if (queue.tracks.length < jumpPosition || jumpPosition < 1) {
+          return interaction.editReply({
+            content: lang.music.invalidSongNumber,
+            ephemeral: true
+          });
+        }
+        try {
+          await queue.node.skipTo(jumpPosition - 1);
+          client.updateCurrentMenu(queue, false);
+          await interaction.editReply({
+            content: client.repVars(lang.music.jumped, { position: jumpPosition }),
+            ephemeral: true
+          });
+        } catch (e) {
+          console.log(e);
+          return interaction.editReply({
+            content: lang.common.error,
+            ephemeral: true
+          });
+        }
+      } else if (interaction.customId == 'm.removeModal') {
+        const removePosition = parseInt(interaction.fields.getTextInputValue('m.removeModalInput'));
+        const queue = useQueue(interaction.guild.id);
+        if (!queue)
+          return interaction.reply({
+            content: lang.common.error,
+            ephemeral: true
+          });
+        if (queue.tracks.length < removePosition || removePosition < 1) {
+          return interaction.editReply({
+            content: lang.music.invalidSongNumber,
+            ephemeral: true
+          });
+        }
+        try {
+          await queue.node.remove(removePosition - 1);
+          queue.queueInt = interaction;
+          client.updateCurrentMenu(queue, false, `queue-${queue.queuePage}`);
         } catch (e) {
           console.log(e);
           return interaction.editReply({

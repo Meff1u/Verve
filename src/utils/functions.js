@@ -28,6 +28,20 @@ module.exports = {
       return string;
     };
 
+    // Check if a string is a URL
+    client.isURL = function (str) {
+      const pattern = new RegExp(
+        '^(https?:\\/\\/)?' + // protocol
+          '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name and extension
+          '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+          '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+          '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+          '(\\#[-a-z\\d_]*)?$',
+        'i'
+      ); // fragment locator
+      return !!pattern.test(str);
+    };
+
     function getQueueTracks(queue, page) {
       page -= 1;
       return queue.tracks.data.slice(page * 10, page * 10 + 10).map((track, i) => {
@@ -48,13 +62,13 @@ module.exports = {
           .setTitle(`Verve - ${lang.commands.start.readyToPlay}`)
           .setColor(client.mainColor)
           .setDescription(lang.commands.start.readyDescription)
-          .setFooter({ text: `Host: ${queue.options.metadata.interaction.user.tag} | ${lang.music.songsInQueue}: ${queue.tracks.data.length}` });
-        return queue.options.metadata.interaction.editReply({
+          .setFooter({ text: `Host: ${queue.options.metadata.interaction.user.tag}` });
+        return queue.playerMessage.edit({
           embeds: [queue.updateEmbed],
           components: [row]
         });
       }
-      
+
       // Queue menu
       else if (action?.split('-')[0] == 'queue') {
         if ((queue.tracks.data.length == 0) | !queue)
@@ -76,7 +90,11 @@ module.exports = {
           rightbutton
         );
         queue.updateEmbed = new EmbedBuilder()
-          .setTitle(client.repVars(lang.music.queueMenuTitle, { 'guildname': queue.options.metadata.interaction.guild.name }))
+          .setTitle(
+            client.repVars(lang.music.queueMenuTitle, {
+              guildname: queue.options.metadata.interaction.guild.name
+            })
+          )
           .setColor(client.mainColor);
 
         queue.updateEmbed.setDescription(getQueueTracks(queue, page).join('\n'));
@@ -86,7 +104,7 @@ module.exports = {
 
         queue.queueInt.deferUpdate();
         delete queue.queueInt;
-        return queue.options.metadata.interaction.editReply({
+        return queue.playerMessage.edit({
           embeds: [queue.updateEmbed],
           components: [row]
         });
@@ -105,29 +123,41 @@ module.exports = {
         .setURL(track.url)
         .setThumbnail(track.thumbnail || null)
         .setColor(client.mainColor)
-        .setFooter({ text: `Host: ${queue.options.metadata.interaction.user.tag} | ${lang.music.songsInQueue}: ${queue.tracks.data.length}` });
+        .setFooter({
+          text: `Host: ${queue.options.metadata.interaction.user.tag} | ${lang.music.songsInQueue}: ${queue.tracks.data.length}`
+        });
 
       if (track.queryType != 'arbitrary') {
-        queue.updateEmbed.addFields(
-          {
-            name: `${currentTextDuration} / ${track.duration}`,
-            value: progressbar.filledBar(
-              dt.t2d(track.duration),
-              Math.floor(queue.node.playbackTime / 1000),
-              25,
-              '◻',
-              '◼'
-            )[0],
-            inline: false
-          }
-        );
+        queue.updateEmbed.addFields({
+          name: `${currentTextDuration} / ${track.duration}`,
+          value: progressbar.filledBar(
+            dt.t2d(track.duration),
+            Math.floor(queue.node.playbackTime / 1000),
+            25,
+            '◻',
+            '◼'
+          )[0],
+          inline: false
+        });
       }
-      queue.updateEmbed.addFields(  {
-            name: '\u200B',
-            value: `${lang.music.addedBy}: ${track.requestedBy}`,
-            inline: true
-          }
-        )
+      queue.updateEmbed.addFields({
+        name: '\u200B',
+        value: `${lang.music.addedBy}: ${track.requestedBy}`,
+        inline: true
+      });
+
+      let thridButtonRow2 = client.buttons.lyrics;
+
+      const embeds = [queue.updateEmbed];
+      if (queue.lyrics) {
+        thridButtonRow2 = client.buttons.lyricsoff;
+        const lyricsEmbed = new EmbedBuilder()
+          .setTitle(`${track.author} - ${track.title}`)
+          .setColor(client.mainColor)
+          .setDescription(queue.lyrics.slice(0, 4096));
+
+        embeds.push(lyricsEmbed);
+      }
 
       // Buttons row 1
       let fifthButtonRow1;
@@ -138,7 +168,7 @@ module.exports = {
         : queue.repeatMode == 1
         ? (fifthButtonRow1 = client.buttons.loopone)
         : (fifthButtonRow1 = client.buttons.loopqueue);
-      
+
       if (queue.node.isPaused()) {
         queue.updateEmbed.data.author = { name: lang.music.pausedTitle };
         thridButtonRow1 = client.buttons.resume;
@@ -184,7 +214,7 @@ module.exports = {
       const menuRow2 = new ActionRowBuilder().addComponents(
         firstButtonRow2,
         client.buttons.clean,
-        client.buttons.lyrics,
+        thridButtonRow2,
         forthButtonRow2,
         client.buttons.stop
       );
@@ -196,8 +226,8 @@ module.exports = {
         client.buttons.search
       );
 
-      queue.options.metadata.interaction.editReply({
-        embeds: [queue.updateEmbed],
+      queue.playerMessage.edit({
+        embeds: embeds,
         components: [menuRow1, menuRow2, menuRow3]
       });
       if (queue.queueInt) {

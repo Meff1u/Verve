@@ -65,6 +65,16 @@
         "songsInQueue": "Songs in queue",
         "pausedTitle": "Paused:",
         "nowPlayingTitle": "Now playing:",
-        "arbitraryTitle": "Livestream:"
+        "arbitraryTitle": "Livestream:",
+        "couldNotExtractStream": "Could not extract stream for this track, skipping to next...",
+        "couldNotExtractShort": "Could not extract stream for this track.",
+        "jumpModalTitle": "Jump to a song in the queue",
+        "jumpModalDescription": "Enter the song number in the queue",
+        "invalidSongNumber": "Invalid song number.",
+        "jumped": "Jumped to position **{position}**.",
+        "removeModalTitle": "Remove a song from the queue",
+        "removeModalDescription": "Enter the song number in the queue to remove",
+        "removed": "Removed the song at position **{position}**.",
+        "noLyricsFound": "No lyrics found."
     }
 }

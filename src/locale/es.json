@@ -65,6 +65,16 @@
         "songsInQueue": "Canciones en cola",
         "pausedTitle": "Pausado:",
         "nowPlayingTitle": "Reproduciendo ahora:",
-        "arbitraryTitle": "Transmisión en vivo:"
+        "arbitraryTitle": "Transmisión en vivo:",
+        "couldNotExtractStream": "No se pudo extraer el flujo para esta canción, saltando a la siguiente...",
+        "couldNotExtractShort": "No se pudo extraer el flujo para esta canción.",
+        "jumpModalTitle": "Saltar a una canción en la cola",
+        "jumpModalDescription": "Introduce el número de la canción en la cola",
+        "invalidSongNumber": "¡Número de canción inválido!",
+        "jumped": "Saltado a la posición **{position}**.",
+        "removeModalTitle": "Eliminar una canción de la cola",
+        "removeModalDescription": "Introduce el número de la canción en la cola para eliminar",
+        "removed": "Eliminada la canción en la posición **{position}**.",
+        "noLyricsFound": "¡No se encontraron letras para esta canción!"
     }
 }

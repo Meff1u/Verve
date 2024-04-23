@@ -41,8 +41,7 @@ client.buttons = {
   clean: new ButtonBuilder()
     .setCustomId('m.clean')
     .setEmoji('1231692071006638130')
-    .setStyle(ButtonStyle.Primary)
-    .setDisabled(true),
+    .setStyle(ButtonStyle.Primary),
   add: new ButtonBuilder()
     .setCustomId('m.add')
     .setEmoji('1231561324329177129')
@@ -81,13 +80,15 @@ client.buttons = {
   jump: new ButtonBuilder()
     .setCustomId('m.jump')
     .setEmoji('1231766273386348604')
-    .setStyle(ButtonStyle.Primary)
-    .setDisabled(true),
+    .setStyle(ButtonStyle.Primary),
   lyrics: new ButtonBuilder()
     .setCustomId('m.lyrics')
     .setEmoji('1231766872693932114')
-    .setStyle(ButtonStyle.Primary)
-    .setDisabled(true),
+    .setStyle(ButtonStyle.Primary),
+  lyricsoff: new ButtonBuilder()
+    .setCustomId('m.lyricsoff')
+    .setEmoji('1231766872693932114')
+    .setStyle(ButtonStyle.Danger),
   goback: new ButtonBuilder()
     .setCustomId('m.goback')
     .setEmoji('1231946291920244808')
@@ -113,7 +114,7 @@ client.buttons = {
   remove: new ButtonBuilder()
     .setCustomId('m.remove')
     .setEmoji('1231949687284826203')
-    .setStyle(ButtonStyle.Primary).setDisabled(true)
+    .setStyle(ButtonStyle.Primary)
 };
 
 client.player = new Player(client, {
