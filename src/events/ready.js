@@ -27,7 +27,7 @@ module.exports = {
     client.trackBackChannel = client.channels.cache.get('1232003060293828710');
 
     // Config Checker
-    config.configChecker(client.guilds.cache);
+    client.configChecker(client.guilds.cache);
 
     // Clean old player message
     cleanOldPlayerMessage(client);
