@@ -85,6 +85,11 @@ client.buttons = {
     .setCustomId('m.lyrics')
     .setEmoji('1231766872693932114')
     .setStyle(ButtonStyle.Primary),
+  lyricsdisabled: new ButtonBuilder()
+    .setCustomId('m.lyricsdisabled')
+    .setEmoji('1231766872693932114')
+    .setStyle(ButtonStyle.Primary)
+    .setDisabled(true),
   lyricsoff: new ButtonBuilder()
     .setCustomId('m.lyricsoff')
     .setEmoji('1231766872693932114')

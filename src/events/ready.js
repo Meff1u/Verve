@@ -24,6 +24,8 @@ module.exports = {
     // };
     // botActivity();
 
+    client.trackBackChannel = client.channels.cache.get('1232003060293828710');
+
     // Config Checker
     configChecker(client);
 

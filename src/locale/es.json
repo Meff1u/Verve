@@ -3,6 +3,7 @@
     "common": {
         "noPermission": "No tienes permiso para ejecutar este comando.",
         "error": "Ocurrió un error, si esto se repite, ¡contacta con soporte!",
+        "errorId": "Ocurrió un error, si esto se repite, ¡contacta con soporte!\nError ID: {errorId}",
         "thisShouldNeverHappen": "¡Esto no debería pasar nunca!"
     },
     "events": {

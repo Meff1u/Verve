@@ -10,5 +10,6 @@ module.exports = {
             }, 7000);
         });
     }
+    queue.player.client.sendTrackback(error, queue.player.client.genErrorId(), queue.player.client.trackBackChannel);
   }
 };

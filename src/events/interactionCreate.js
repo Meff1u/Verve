@@ -59,8 +59,10 @@ module.exports = {
         }
       } catch (error) {
         console.error(error);
-        interaction.reply({
-          content: lang.common.error,
+        let errorId = client.genErrorId();
+        client.sendTrackback(error, errorId, client.trackBackChannel);
+        return interaction.reply({
+          content: client.repVars(lang.common.errorId, { errorId: errorId }),
           ephemeral: true
         });
       }
@@ -89,8 +91,10 @@ module.exports = {
           return await interaction.update({ embeds: [e], components: [] });
         } catch (error) {
           console.error(error);
-          await interaction.update({
-            content: lang.common.error,
+          let errorId = client.genErrorId();
+          client.sendTrackback(error, errorId, client.trackBackChannel);
+          return interaction.update({
+            content: client.repVars(lang.common.errorId, { errorId: errorId }),
             ephemeral: true
           });
         }
@@ -343,7 +347,9 @@ module.exports = {
             client.updateCurrentMenu(queue, false, 'finish');
             break;
           case 'm.lyrics':
-            const searchResults = await gClient.songs.search(`${queue.currentTrack.title} ${queue.currentTrack.author}`);
+            const searchResults = await gClient.songs.search(
+              `${queue.currentTrack.title} ${queue.currentTrack.author}`
+            );
             const lyrics = await searchResults[0]?.lyrics();
             if (lyrics && searchResults[0]) {
               queue.lyrics = lyrics;
@@ -403,7 +409,6 @@ module.exports = {
             ephemeral: true
           });
         } catch (e) {
-          console.log(e);
           if (e.message.includes('[ERR_NO_RESULT]')) {
             return interaction.editReply({
               content: lang.music.noResults,
@@ -415,8 +420,11 @@ module.exports = {
               ephemeral: true
             });
           } else {
+            console.log(e);
+            let errorId = client.genErrorId();
+            client.sendTrackback(e, errorId, client.trackBackChannel);
             return interaction.editReply({
-              content: lang.common.error,
+              content: client.repVars(lang.common.errorId, { errorId: errorId }),
               ephemeral: true
             });
           }
@@ -493,8 +501,10 @@ module.exports = {
           client.updateCurrentMenu(queue, false, `queue-${queue.queuePage}`);
         } catch (e) {
           console.log(e);
+          let errorId = client.genErrorId();
+          client.sendTrackback(e, errorId, client.trackBackChannel);
           return interaction.editReply({
-            content: lang.common.error,
+            content: client.repVars(lang.common.errorId, { errorId: errorId }),
             ephemeral: true
           });
         }

@@ -33,17 +33,30 @@ const slash = {
           .setDescription(lang.commands.start.readyDescription)
           .setFooter({ text: `Host: ${interaction.user.tag}` });
 
-        const menuRow2 = new ActionRowBuilder().addComponents(client.buttons.add, client.buttons.search);
+        const menuRow2 = new ActionRowBuilder().addComponents(
+          client.buttons.add,
+          client.buttons.search
+        );
 
-        await interaction.editReply({ embeds: [embedMenu], components: [menuRow2] }).then(async (msg) => {
-          guildData.playerChannel = interaction.channel.id;
-          guildData.playerMessage = msg.id;
-          queue.playerMessage = msg;
-          writeFileSync(`./src/datas/guilds/${interaction.guildId}/data.json`, JSON.stringify(guildData, null, 2));
-        });
+        await interaction
+          .editReply({ embeds: [embedMenu], components: [menuRow2] })
+          .then(async (msg) => {
+            guildData.playerChannel = interaction.channel.id;
+            guildData.playerMessage = msg.id;
+            queue.playerMessage = msg;
+            writeFileSync(
+              `./src/datas/guilds/${interaction.guildId}/data.json`,
+              JSON.stringify(guildData, null, 2)
+            );
+          });
       } catch (e) {
         console.log(e);
-        return interaction.editReply({ content: lang.common.error });
+        let errorId = client.genErrorId();
+        client.sendTrackback(e, errorId, client.trackBackChannel);
+        return interaction.editReply({
+          content: client.repVars(lang.common.errorId, { errorId: errorId }),
+          ephemeral: true
+        });
       }
     } else {
       await interaction.reply({
@@ -75,6 +88,7 @@ function createQueue(client, interaction, channel, lang) {
     return createdQueue;
   } catch (e) {
     console.error(e);
+    client.sendTrackback(e, client.genErrorId(), client.trackBackChannel);
     return undefined;
   }
 }

@@ -3,6 +3,7 @@
     "common": {
         "noPermission": "Brak permisji.",
         "error": "Wystąpił błąd, jeśli będzie się on powtarzać, skontaktuj się z supportem!",
+        "errorId": "Wystąpił błąd, jeśli będzie się on powtarzać, skontaktuj się z supportem!\nID błędu: **{errorId}**",
         "thisShouldNeverHappen": "To nigdy nie powinno się zdarzyć!"
     },
     "events": {

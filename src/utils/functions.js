@@ -28,20 +28,25 @@ module.exports = {
       return string;
     };
 
-    // Check if a string is a URL
-    client.isURL = function (str) {
-      const pattern = new RegExp(
-        '^(https?:\\/\\/)?' + // protocol
-          '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name and extension
-          '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-          '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-          '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-          '(\\#[-a-z\\d_]*)?$',
-        'i'
-      ); // fragment locator
-      return !!pattern.test(str);
-    };
+    // Send trackback
+    client.sendTrackback = function (error, errorId, channel) {
+      return channel.send({
+        embeds: [
+          new EmbedBuilder()
+            .setTitle(`${error.message}`)
+            .setColor('#ff0000')
+            .setFooter({ text: `Error ID: ${errorId}`})
+            .setDescription(error.stack.slice(0, 2048))
+        ]
+      });
+    }
 
+    // Generate error ID
+    client.genErrorId = function () {
+      return Math.floor(10000 + Math.random() * 90000);
+    }
+
+    // Get queue tracks
     function getQueueTracks(queue, page) {
       page -= 1;
       return queue.tracks.data.slice(page * 10, page * 10 + 10).map((track, i) => {
@@ -54,6 +59,7 @@ module.exports = {
     // Update current menu
     client.updateCurrentMenu = function (queue, doInterval, action) {
       const lang = queue.options.metadata.lang;
+
       // Finish the menu if there are no more tracks in the queue
       if (action == 'finish' && queue.tracks.data.length == 0) {
         clearInterval(queue.menuUpdateInterval);
@@ -149,6 +155,8 @@ module.exports = {
       let thridButtonRow2 = client.buttons.lyrics;
 
       const embeds = [queue.updateEmbed];
+
+      // Lyrics embed
       if (queue.lyrics) {
         thridButtonRow2 = client.buttons.lyricsoff;
         const lyricsEmbed = new EmbedBuilder()
@@ -196,6 +204,7 @@ module.exports = {
 
       if (track.queryType == 'arbitrary') {
         firstButtonRow2 = client.buttons.seekdisabled;
+        thridButtonRow2 = client.buttons.lyricsdisabled;
       } else {
         firstButtonRow2 = client.buttons.seek;
       }

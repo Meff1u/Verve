@@ -3,6 +3,7 @@
     "common": {
         "noPermission": "No permission.",
         "error": "An error has occurred, if this continues, contact support!",
+        "errorId": "An error has occurred, if this continues, contact support!\nError ID: **{errorId}**",
         "thisShouldNeverHappen": "This should never happen!"
     },
     "events": {

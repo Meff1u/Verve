@@ -24,12 +24,15 @@ module.exports = {
 
     process.on('unhandledRejection', (e) => {
       console.log(e);
+      client.sendTrackback(e, client.genErrorId(), client.trackBackChannel);
     });
     process.on('uncaughtException', (e) => {
       console.log(e);
+      client.sendTrackback(e, client.genErrorId(), client.trackBackChannel);
     });
     process.on('uncaughtExceptionMonitor', (e) => {
       console.log(e);
+      client.sendTrackback(e, client.genErrorId(), client.trackBackChannel);
     });
   }
 };
