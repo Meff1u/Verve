@@ -1,7 +1,7 @@
 const { ActivityType, Events } = require('discord.js');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v10');
-const { existsSync, mkdirSync, writeFileSync, readdirSync, readFileSync } = require('fs');
+const { existsSync, writeFileSync, readdirSync, readFileSync } = require('fs');
 
 module.exports = {
   name: Events.ClientReady,

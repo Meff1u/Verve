@@ -1,4 +1,5 @@
 const { EmbedBuilder, ActionRowBuilder } = require('discord.js');
+const { existsSync, writeFileSync, mkdirSync } = require('fs');
 const moment = require('moment');
 const dt = require('duration-time-conversion');
 const progressbar = require('string-progressbar');
@@ -298,12 +299,12 @@ module.exports = {
     // Create embed
     function createEmbed(title, url, thumbnail, color, footer, description) {
       const embed = new EmbedBuilder()
-        .setTitle(title)
-        .setURL(url)
+        .setTitle(title || null)
+        .setURL(url || null)
         .setThumbnail(thumbnail || null)
-        .setColor(color)
-        .setFooter(footer)
-        .setDescription(description);
+        .setColor(color || null)
+        .setFooter(footer || null)
+        .setDescription(description || null);
       return embed;
     }
   }
