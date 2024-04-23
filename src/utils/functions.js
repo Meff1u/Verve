@@ -28,6 +28,30 @@ module.exports = {
       return string;
     };
 
+    // Config checker
+    client.configChecker = function (guilds) {
+      guilds.forEach((g) => {
+        if (existsSync(`./src/datas/guilds/${g.id}`)) {
+          if (!existsSync(`./src/datas/guilds/${g.id}/data.json`)) {
+            writeFileSync(
+              `./src/datas/guilds/${g.id}/data.json`,
+              JSON.stringify({ lang: 'us' }, null, 2),
+              'utf8'
+            );
+            client.log(`Created missing data file for ${g.name}`);
+          }
+        } else {
+          mkdirSync(`./src/datas/guilds/${g.id}`, { recursive: true });
+          writeFileSync(
+            `./src/datas/guilds/${g.id}/data.json`,
+            JSON.stringify({ lang: 'us' }, null, 2),
+            'utf8'
+          );
+          client.log(`Created data directory for ${g.name}`);
+        }
+      });
+    };
+
     // Send trackback
     client.sendTrackback = function (error, errorId, channel) {
       return channel.send({

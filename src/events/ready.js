@@ -27,7 +27,7 @@ module.exports = {
     client.trackBackChannel = client.channels.cache.get('1232003060293828710');
 
     // Config Checker
-    configChecker(client);
+    config.configChecker(client.guilds.cache);
 
     // Clean old player message
     cleanOldPlayerMessage(client);
@@ -79,21 +79,6 @@ function cleanOldPlayerMessage(client) {
       client.log('Old player message not found');
     }
   }
-}
-
-function configChecker(client) {
-  client.guilds.cache.forEach((g) => {
-    if (existsSync(`./src/datas/guilds/${g.id}`)) {
-      if (!existsSync(`./src/datas/guilds/${g.id}/data.json`)) {
-        writeFileSync(`./src/datas/guilds/${g.id}/data.json`, JSON.stringify({ lang: 'us' }, null, 2), 'utf8');
-        client.log(`Created missing data file for ${g.name}`);
-      }
-    } else {
-      mkdirSync(`./src/datas/guilds/${g.id}`, { recursive: true });
-      writeFileSync(`./src/datas/guilds/${g.id}/data.json`, JSON.stringify({ lang: 'us' }, null, 2), 'utf8');
-      client.log(`Created data directory for ${g.name}`);
-    }
-  });
 }
 
 async function cmdIds(client) {
