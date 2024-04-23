@@ -35,16 +35,16 @@ module.exports = {
           new EmbedBuilder()
             .setTitle(`${error.message}`)
             .setColor('#ff0000')
-            .setFooter({ text: `Error ID: ${errorId}`})
+            .setFooter({ text: `Error ID: ${errorId}` })
             .setDescription(error.stack.slice(0, 2048))
         ]
       });
-    }
+    };
 
     // Generate error ID
     client.genErrorId = function () {
       return Math.floor(10000 + Math.random() * 90000);
-    }
+    };
 
     // Get queue tracks
     function getQueueTracks(queue, page) {
@@ -63,16 +63,16 @@ module.exports = {
       // Finish the menu if there are no more tracks in the queue
       if (action == 'finish' && queue.tracks.data.length == 0) {
         clearInterval(queue.menuUpdateInterval);
-        const row = new ActionRowBuilder().addComponents(client.buttons.add, client.buttons.search);
-        queue.updateEmbed = new EmbedBuilder()
-          .setTitle(`Verve - ${lang.commands.start.readyToPlay}`)
-          .setColor(client.mainColor)
-          .setDescription(lang.commands.start.readyDescription)
-          .setFooter({ text: `Host: ${queue.options.metadata.interaction.user.tag}` });
-        return queue.playerMessage.edit({
-          embeds: [queue.updateEmbed],
-          components: [row]
-        });
+        const row = createActionRow([client.buttons.add, client.buttons.search]);
+        queue.updateEmbed = createEmbed(
+          `Verve - ${lang.commands.start.readyToPlay}`,
+          null,
+          null,
+          client.mainColor,
+          { text: `Host: ${queue.options.metadata.interaction.user.tag}` },
+          lang.commands.start.readyDescription
+        );
+        return editPlayerMessage(queue.playerMessage, [queue.updateEmbed], [row]);
       }
 
       // Queue menu
@@ -88,32 +88,29 @@ module.exports = {
         const rightbutton =
           page == totalPages ? client.buttons.rightdisabled : client.buttons.right;
 
-        const row = new ActionRowBuilder().addComponents(
+        const row = createActionRow([
           client.buttons.goback,
           leftbutton,
           client.buttons.jump,
           client.buttons.remove,
           rightbutton
+        ]);
+        queue.updateEmbed = createEmbed(
+          client.repVars(lang.music.queueMenuTitle, {
+            guildname: queue.options.metadata.interaction.guild.name
+          }),
+          null,
+          null,
+          client.mainColor,
+          {
+            text: `${lang.music.page} ${page}/${totalPages} | Host: ${queue.options.metadata.interaction.user.tag}`
+          },
+          getQueueTracks(queue, page).join('\n')
         );
-        queue.updateEmbed = new EmbedBuilder()
-          .setTitle(
-            client.repVars(lang.music.queueMenuTitle, {
-              guildname: queue.options.metadata.interaction.guild.name
-            })
-          )
-          .setColor(client.mainColor);
-
-        queue.updateEmbed.setDescription(getQueueTracks(queue, page).join('\n'));
-        queue.updateEmbed.setFooter({
-          text: `${lang.music.page} ${page}/${totalPages} | Host: ${queue.options.metadata.interaction.user.tag}`
-        });
 
         queue.queueInt.deferUpdate();
         delete queue.queueInt;
-        return queue.playerMessage.edit({
-          embeds: [queue.updateEmbed],
-          components: [row]
-        });
+        return editPlayerMessage(queue.playerMessage, [queue.updateEmbed], [row]);
       }
       const track = queue.currentTrack;
       if (!track) return;
@@ -124,14 +121,15 @@ module.exports = {
       if (splitDuration[0] == '00') splitDuration.shift();
       currentTextDuration = splitDuration.join(':');
 
-      queue.updateEmbed = new EmbedBuilder()
-        .setTitle(`${track.author} - ${track.title}`)
-        .setURL(track.url)
-        .setThumbnail(track.thumbnail || null)
-        .setColor(client.mainColor)
-        .setFooter({
+      queue.updateEmbed = createEmbed(
+        `${track.author} - ${track.title}`,
+        track.url,
+        track.thumbnail || null,
+        client.mainColor,
+        {
           text: `Host: ${queue.options.metadata.interaction.user.tag} | ${lang.music.songsInQueue}: ${queue.tracks.data.length}`
-        });
+        }
+      );
 
       if (track.queryType != 'arbitrary') {
         queue.updateEmbed.addFields({
@@ -159,11 +157,14 @@ module.exports = {
       // Lyrics embed
       if (queue.lyrics) {
         thridButtonRow2 = client.buttons.lyricsoff;
-        const lyricsEmbed = new EmbedBuilder()
-          .setTitle(`${track.author} - ${track.title}`)
-          .setColor(client.mainColor)
-          .setDescription(queue.lyrics.slice(0, 4096));
-
+        const lyricsEmbed = createEmbed(
+          `${track.author} - ${track.title}`,
+          null,
+          null,
+          client.mainColor,
+          null,
+          queue.lyrics.slice(0, 4096)
+        );
         embeds.push(lyricsEmbed);
       }
 
@@ -189,13 +190,13 @@ module.exports = {
         queue.updateEmbed.data.author = { name: lang.music.arbitraryTitle };
       }
 
-      const menuRow1 = new ActionRowBuilder().addComponents(
+      const menuRow1 = createActionRow([
         client.buttons.shuffle,
         client.buttons.back,
         thridButtonRow1,
         client.buttons.skip,
         fifthButtonRow1
-      );
+      ]);
 
       // Buttons row 2
 
@@ -220,40 +221,66 @@ module.exports = {
         forthButtonRow2 = client.buttons.queuedisabled;
       }
 
-      const menuRow2 = new ActionRowBuilder().addComponents(
+      const menuRow2 = createActionRow([
         firstButtonRow2,
         client.buttons.clean,
         thridButtonRow2,
         forthButtonRow2,
         client.buttons.stop
-      );
+      ]);
 
       // Buttons row 3
 
-      const menuRow3 = new ActionRowBuilder().addComponents(
-        client.buttons.add,
-        client.buttons.search
-      );
+      const menuRow3 = createActionRow([client.buttons.add, client.buttons.search]);
 
-      queue.playerMessage.edit({
-        embeds: embeds,
-        components: [menuRow1, menuRow2, menuRow3]
-      });
+      editPlayerMessage(queue.playerMessage, embeds, [menuRow1, menuRow2, menuRow3]);
       if (queue.queueInt) {
         queue.queueInt.deferUpdate();
         delete queue.queueInt;
       }
 
-      if (doInterval && track.queryType != 'arbitrary') {
-        clearInterval(queue.menuUpdateInterval);
+      if (queue.menuUpdateInterval) {
+        if (queue.node.isPaused() || track.queryType == 'arbitrary') {
+          clearInterval(queue.menuUpdateInterval);
+          queue.menuUpdateInterval = null;
+        }
+      } else if (doInterval && track.queryType != 'arbitrary') {
         queue.menuUpdateInterval = setInterval(() => {
           if (queue.node.isPaused()) {
-            return clearInterval(queue.menuUpdateInterval);
+            clearInterval(queue.menuUpdateInterval);
+            queue.menuUpdateInterval = null;
+          } else {
+            client.updateCurrentMenu(queue, true);
           }
-
-          client.updateCurrentMenu(queue, true);
         }, queue.intervalDuration);
       }
     };
+
+    // Create action row
+    function createActionRow(buttons) {
+      const row = new ActionRowBuilder();
+      buttons.forEach((button) => row.addComponents(button));
+      return row;
+    }
+
+    // Edit player message
+    function editPlayerMessage(playerMessage, embeds, components) {
+      return playerMessage.edit({
+        embeds: embeds,
+        components: components
+      });
+    }
+
+    // Create embed
+    function createEmbed(title, url, thumbnail, color, footer, description) {
+      const embed = new EmbedBuilder()
+        .setTitle(title)
+        .setURL(url)
+        .setThumbnail(thumbnail || null)
+        .setColor(color)
+        .setFooter(footer)
+        .setDescription(description);
+      return embed;
+    }
   }
 };
