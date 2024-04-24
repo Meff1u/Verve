@@ -55,7 +55,7 @@
         "shuffled": "¡Cola mezclada!",
         "shuffleError": "¡La cola es demasiado corta para mezclarla!",
         "seekModalTitle": "Avance rápido la canción",
-        "seekModalDescription": "Introduce el tiempo en segundos al que quieres saltar en la canción.",
+        "seekModalDescription": "Introduce el tiempo en segundos",
         "seeked": "¡Canción saltó a {time}s!",
         "outOfSpace": "¡No hay espacio en la cola para añadir esta canción!",
         "noTrackToSkip": "¡No hay canción para saltar!",
@@ -76,6 +76,8 @@
         "removeModalTitle": "Eliminar una canción de la cola",
         "removeModalDescription": "Introduce el número de la canción en la cola para eliminar",
         "removed": "Eliminada la canción en la posición **{position}**.",
-        "noLyricsFound": "¡No se encontraron letras para esta canción!"
+        "noLyricsFound": "¡No se encontraron letras para esta canción!",
+        "noRadioResults": "No se encontraron estaciones de radio.",
+        "nextUp": "Siguiente canción:"
     }
 }

@@ -55,7 +55,7 @@
         "shuffled": "Shuffled the queue.",
         "shuffleError": "Queue is too short to shuffle.",
         "seekModalTitle": "Seek to a position",
-        "seekModalDescription": "Skip amount of time in seconds in the song.",
+        "seekModalDescription": "Skip amount of time in seconds",
         "seeked": "Seeked to {time}s.",
         "outOfSpace": "Max capacity reached for tracks queue",
         "noTrackToSkip": "There's no track to skip.",
@@ -76,6 +76,8 @@
         "removeModalTitle": "Remove a song from the queue",
         "removeModalDescription": "Enter the song number in the queue to remove",
         "removed": "Removed the song at position **{position}**.",
-        "noLyricsFound": "No lyrics found."
+        "noLyricsFound": "No lyrics found.",
+        "noRadioResults": "No radio stations found.",
+        "nextUp": "Next up:"
     }
 }

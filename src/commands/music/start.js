@@ -33,13 +33,14 @@ const slash = {
           .setDescription(lang.commands.start.readyDescription)
           .setFooter({ text: `Host: ${interaction.user.tag}` });
 
-        const menuRow2 = new ActionRowBuilder().addComponents(
+        const menuRow = new ActionRowBuilder().addComponents(
           client.buttons.add,
-          client.buttons.search
+          client.buttons.search,
+          client.buttons.radio,
         );
 
         await interaction
-          .editReply({ embeds: [embedMenu], components: [menuRow2] })
+          .editReply({ embeds: [embedMenu], components: [menuRow] })
           .then(async (msg) => {
             guildData.playerChannel = interaction.channel.id;
             guildData.playerMessage = msg.id;

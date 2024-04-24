@@ -318,6 +318,10 @@ module.exports = {
 
             await interaction.showModal(removeModal);
             break;
+          case 'm.radio':
+            queue.radioInt = interaction;
+            client.updateCurrentMenu(queue, false, 'radio');
+            break;
           case 'm.queue':
             queue.queueInt = interaction;
             queue.queuePage = 1;

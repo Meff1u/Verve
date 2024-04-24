@@ -137,6 +137,21 @@ module.exports = {
         delete queue.queueInt;
         return editPlayerMessage(queue.playerMessage, [queue.updateEmbed], [row]);
       }
+
+      // Radio menu
+      else if (action == 'radio') {
+        clearInterval(queue.menuUpdateInterval);
+        const row = createActionRow([client.buttons.goback, ]);
+        queue.updateEmbed = createEmbed(
+          lang.music.radioMenuTitle,
+          null,
+          null,
+          client.mainColor,
+          { text: `Host: ${queue.options.metadata.interaction.user.tag}` },
+          lang.music.radioMenuDescription
+        );
+        return editPlayerMessage(queue.playerMessage, [queue.updateEmbed], [row]);
+      }
       const track = queue.currentTrack;
       if (!track) return;
 
@@ -156,7 +171,7 @@ module.exports = {
         }
       );
 
-      if (track.queryType != 'arbitrary') {
+      if (track.queryType != 'arbitrary' && !track.raw.live) {
         queue.updateEmbed.addFields({
           name: `${currentTextDuration} / ${track.duration}`,
           value: progressbar.filledBar(
@@ -169,11 +184,6 @@ module.exports = {
           inline: false
         });
       }
-      queue.updateEmbed.addFields({
-        name: '\u200B',
-        value: `${lang.music.addedBy}: ${track.requestedBy}`,
-        inline: true
-      });
 
       let thridButtonRow2 = client.buttons.lyrics;
 
@@ -211,7 +221,7 @@ module.exports = {
         thridButtonRow1 = client.buttons.pause;
       }
 
-      if (track.queryType == 'arbitrary') {
+      if (track.queryType == 'arbitrary' || track.raw.live) {
         queue.updateEmbed.data.author = { name: lang.music.arbitraryTitle };
       }
 
@@ -228,7 +238,7 @@ module.exports = {
       let forthButtonRow2;
       let firstButtonRow2;
 
-      if (track.queryType == 'arbitrary') {
+      if (track.queryType == 'arbitrary' || track.raw.live) {
         firstButtonRow2 = client.buttons.seekdisabled;
         thridButtonRow2 = client.buttons.lyricsdisabled;
       } else {
@@ -237,7 +247,7 @@ module.exports = {
 
       if (queue.tracks.data.length > 0) {
         queue.updateEmbed.addFields({
-          name: 'Next up:',
+          name: lang.music.nextUp,
           value: `[${queue.tracks.data[0].title}](${queue.tracks.data[0].url})`,
           inline: true
         });
@@ -245,6 +255,12 @@ module.exports = {
       } else {
         forthButtonRow2 = client.buttons.queuedisabled;
       }
+
+      queue.updateEmbed.addFields({
+        name: '\u200B',
+        value: `${lang.music.addedBy}: ${track.requestedBy}`,
+        inline: true
+      });
 
       const menuRow2 = createActionRow([
         firstButtonRow2,
@@ -256,7 +272,7 @@ module.exports = {
 
       // Buttons row 3
 
-      const menuRow3 = createActionRow([client.buttons.add, client.buttons.search]);
+      const menuRow3 = createActionRow([client.buttons.add, client.buttons.search, client.buttons.radio]);
 
       editPlayerMessage(queue.playerMessage, embeds, [menuRow1, menuRow2, menuRow3]);
       if (queue.queueInt) {
@@ -265,11 +281,11 @@ module.exports = {
       }
 
       if (queue.menuUpdateInterval) {
-        if (queue.node.isPaused() || track.queryType == 'arbitrary') {
+        if (queue.node.isPaused() || track.queryType == 'arbitrary' || track.raw.live) {
           clearInterval(queue.menuUpdateInterval);
           queue.menuUpdateInterval = null;
         }
-      } else if (doInterval && track.queryType != 'arbitrary') {
+      } else if (doInterval && (track.queryType != 'arbitrary' && !track.raw.live)) {
         queue.menuUpdateInterval = setInterval(() => {
           if (queue.node.isPaused()) {
             clearInterval(queue.menuUpdateInterval);

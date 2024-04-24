@@ -55,7 +55,7 @@
         "shuffled": "Kolejka została wymieszana.",
         "shuffleError": "Kolejka jest zbyt krótka, aby ją wymieszać.",
         "seekModalTitle": "Przewijanie utworu",
-        "seekModalDescription": "Wprowadź czas w sekundach, do którego chcesz przewinąć utwór.",
+        "seekModalDescription": "Wprowadź czas w sekundach",
         "seeked": "Przewinięto utwór do {time}s.",
         "outOfSpace": "Nie ma już miejsca w kolejce, aby dodać ten utwór.",
         "noTrackToSkip": "Nie ma utworu do pominięcia.",
@@ -76,6 +76,8 @@
         "removeModalTitle": "Usuwanie utworu z kolejki",
         "removeModalDescription": "Wprowadź numer utworu, który chcesz usunąć z kolejki",
         "removed": "Usunięto utwór z pozycji **{position}**.",
-        "noLyricsFound": "Nie znaleziono tekstu dla tego utworu."
+        "noLyricsFound": "Nie znaleziono tekstu dla tego utworu.",
+        "noRadioResults": "Nie znaleziono żadnych stacji radiowych.",
+        "nextUp": "Następny utwór:"
     }
 }

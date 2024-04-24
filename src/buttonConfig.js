@@ -110,5 +110,10 @@ module.exports = {
   remove: new ButtonBuilder()
     .setCustomId('m.remove')
     .setEmoji('1231949687284826203')
-    .setStyle(ButtonStyle.Primary)
+    .setStyle(ButtonStyle.Primary),
+  radio: new ButtonBuilder()
+    .setCustomId('m.radio')
+    .setEmoji('1232471972831563827')
+    .setStyle(ButtonStyle.Success)
+    .setDisabled(true),
 };
