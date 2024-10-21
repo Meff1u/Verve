@@ -17,10 +17,12 @@ const slash = {
 
       try {
         if (useQueue(interaction.guild.id))
-          return interaction.editReply({
-            content: lang.commands.start.alreadyActive,
-            ephemeral: true
-          });
+          return interaction
+            .editReply({
+              content: lang.commands.start.alreadyActive,
+              ephemeral: true
+            })
+            .then((msg) => setTimeout(() => msg.delete(), 5000));
         const queue = createQueue(client, interaction, channel, lang);
         if (!queue) return interaction.editReply({ content: lang.common.error });
 
@@ -36,7 +38,7 @@ const slash = {
         const menuRow = new ActionRowBuilder().addComponents(
           client.buttons.add,
           client.buttons.search,
-          client.buttons.radio,
+          client.buttons.radio
         );
 
         await interaction

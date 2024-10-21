@@ -1,7 +1,7 @@
 const { Client, GatewayIntentBits, Partials, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { Player } = require('discord-player');
 const { readdirSync } = require('node:fs');
-const package = require('./package.json');
+const { YoutubeiExtractor } = require("discord-player-youtubei");
 const config = require('./src/config');
 const buttonConfig = require('./src/buttonConfig');
 
@@ -16,7 +16,7 @@ client.buttons = buttonConfig;
 client.player = new Player(client, {
   skipFFmpeg: false
 });
-client.package = package;
+client.package = require('./package.json');
 
 async function loadUtils() {
   const utilFiles = readdirSync('./src/utils');
@@ -25,6 +25,7 @@ async function loadUtils() {
 }
 
 async function loadDefaultExtractors() {
+  await client.player.extractors.register(YoutubeiExtractor, {});
   await client.player.extractors.loadDefault((ext) => ext !== 'YouTubeExctractor');
 }
 

@@ -58,7 +58,7 @@ module.exports = {
       return channel.send({
         embeds: [
           new EmbedBuilder()
-            .setTitle(`${error.message}`)
+            .setTitle(`${error.message.slice(0, 256)}`)
             .setColor('#ff0000')
             .setFooter({ text: `Error ID: ${errorId}` })
             .setDescription(error.stack.slice(0, 2048))
@@ -88,6 +88,7 @@ module.exports = {
       // Finish the menu if there are no more tracks in the queue
       if (action == 'finish' && queue.tracks.data.length == 0) {
         clearInterval(queue.menuUpdateInterval);
+        queue.menuUpdateInterval = null;
         const row = createActionRow([client.buttons.add, client.buttons.search]);
         queue.updateEmbed = createEmbed(
           `Verve - ${lang.commands.start.readyToPlay}`,
@@ -141,7 +142,7 @@ module.exports = {
       // Radio menu
       else if (action == 'radio') {
         clearInterval(queue.menuUpdateInterval);
-        const row = createActionRow([client.buttons.goback, ]);
+        const row = createActionRow([client.buttons.goback]);
         queue.updateEmbed = createEmbed(
           lang.music.radioMenuTitle,
           null,
@@ -272,7 +273,11 @@ module.exports = {
 
       // Buttons row 3
 
-      const menuRow3 = createActionRow([client.buttons.add, client.buttons.search, client.buttons.radio]);
+      const menuRow3 = createActionRow([
+        client.buttons.add,
+        client.buttons.search,
+        client.buttons.radio
+      ]);
 
       editPlayerMessage(queue.playerMessage, embeds, [menuRow1, menuRow2, menuRow3]);
       if (queue.queueInt) {
@@ -285,7 +290,7 @@ module.exports = {
           clearInterval(queue.menuUpdateInterval);
           queue.menuUpdateInterval = null;
         }
-      } else if (doInterval && (track.queryType != 'arbitrary' && !track.raw.live)) {
+      } else if (doInterval && track.queryType != 'arbitrary' && !track.raw.live) {
         queue.menuUpdateInterval = setInterval(() => {
           if (queue.node.isPaused()) {
             clearInterval(queue.menuUpdateInterval);
@@ -293,7 +298,7 @@ module.exports = {
           } else {
             client.updateCurrentMenu(queue, true);
           }
-        }, queue.intervalDuration);
+        }, queue.intervalDuration * 1000);
       }
     };
 

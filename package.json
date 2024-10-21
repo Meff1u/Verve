@@ -1,6 +1,6 @@
 {
   "name": "verve",
-  "version": "3.0.0-pre7",
+  "version": "3.0.0-pre8",
   "description": "Verve - Your favourite music tool",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,8 @@
   "dependencies": {
     "@discord-player/extractor": "^4.4.7",
     "@discordjs/voice": "^0.16.1",
-    "discord-player": "^6.6.8",
+    "discord-player": "^6.7.1",
+    "discord-player-youtubei": "^1.3.3",
     "discord.js": "^14.14.1",
     "duration-time-conversion": "^1.0.6",
     "express": "^4.19.2",

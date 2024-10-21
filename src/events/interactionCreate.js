@@ -179,7 +179,7 @@ module.exports = {
             const input = new TextInputBuilder()
               .setCustomId('m.inputquery')
               .setLabel(lang.music.addModalDescription)
-              .setMaxLength(65)
+              .setMaxLength(200)
               .setRequired(true)
               .setPlaceholder(lang.music.addModalPlaceholder)
               .setStyle(TextInputStyle.Short);
@@ -329,6 +329,7 @@ module.exports = {
             break;
           case 'm.goback':
             queue.queueInt = interaction;
+            queue.menuUpdateInterval = null;
             client.updateCurrentMenu(queue, true);
             break;
           case 'm.left':
