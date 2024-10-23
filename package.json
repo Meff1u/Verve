@@ -1,6 +1,6 @@
 {
   "name": "verve",
-  "version": "3.0.0-pre8",
+  "version": "3.0.0-pre9",
   "description": "Verve - Your favourite music tool",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,7 @@
     "genius-lyrics": "^4.4.7",
     "mediaplex": "^0.0.9",
     "moment": "^2.30.1",
+    "node-fetch": "^3.3.2",
     "radio-browser": "^2.2.3",
     "react": "^18.2.0",
     "string-progressbar": "^1.0.4",

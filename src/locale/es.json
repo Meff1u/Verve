@@ -78,6 +78,18 @@
         "removed": "Eliminada la canción en la posición **{position}**.",
         "noLyricsFound": "¡No se encontraron letras para esta canción!",
         "noRadioResults": "No se encontraron estaciones de radio.",
-        "nextUp": "Siguiente canción:"
+        "nextUp": "Siguiente canción:",
+        "radioMenuTitle": "Verve - Radio",
+        "radioMenuDescription": "Busca una estación de radio para reproducir con el botón de abajo.",
+        "searchRadioModalTitle": "Buscar una estación de radio",
+        "searchRadioModalDescription": "Introduce el nombre de la estación de radio:",
+        "radioSelectPlaceholder": "Selecciona una estación de radio",
+        "radioNoHomepage": "No hay página de inicio disponible.",
+        "addingRadioToQueue": "Añadiendo estación de radio a la cola...",
+        "maxCapacity": "¡Se ha alcanzado la capacidad máxima de la cola! Puedes añadir hasta 200 canciones a la vez.",
+        "searchModalTitle": "Buscar una canción",
+        "searchModalDescription": "Introduce el nombre de la canción que quieres buscar:",
+        "searchSelectPlaceholder": "Selecciona la canción que quieres añadir a la cola",
+        "addingSearchToQueue": "Añadiendo canción a la cola..."
     }
 }

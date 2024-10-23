@@ -78,6 +78,18 @@
         "removed": "Removed the song at position **{position}**.",
         "noLyricsFound": "No lyrics found.",
         "noRadioResults": "No radio stations found.",
-        "nextUp": "Next up:"
+        "nextUp": "Next up:",
+        "radioMenuTitle": "Verve - Radio",
+        "radioMenuDescription": "Search for a radio station you want to play using the button below.",
+        "searchRadioModalTitle": "Search for a radio station",
+        "searchRadioModalDescription": "Enter the radio station name:",
+        "radioSelectPlaceholder": "Select a radio station",
+        "radioNoHomepage": "No homepage available.",
+        "addingRadioToQueue": "Adding radio station to the queue...",
+        "maxCapacity": "Max capacity reached for tracks queue. You can add up to 200 tracks at once.",
+        "searchModalTitle": "Search for a song",
+        "searchModalDescription": "Enter the song name you want to search:",
+        "searchSelectPlaceholder": "Select the song you want to add to the queue",
+        "addingSearchToQueue": "Adding song to the queue..."
     }
 }

@@ -57,8 +57,11 @@ module.exports = {
   search: new ButtonBuilder()
     .setCustomId('m.search')
     .setEmoji('1231763436049010760')
-    .setStyle(ButtonStyle.Success)
-    .setDisabled(true),
+    .setStyle(ButtonStyle.Success),
+  searchradio: new ButtonBuilder()
+    .setCustomId('m.searchradio')
+    .setEmoji('1231763436049010760')
+    .setStyle(ButtonStyle.Success),
   seek: new ButtonBuilder()
     .setCustomId('m.seek')
     .setEmoji('1231764685850808371')
@@ -115,5 +118,5 @@ module.exports = {
     .setCustomId('m.radio')
     .setEmoji('1232471972831563827')
     .setStyle(ButtonStyle.Success)
-    .setDisabled(true),
+    .setDisabled(false),
 };

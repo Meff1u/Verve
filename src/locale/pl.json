@@ -78,6 +78,18 @@
         "removed": "Usunięto utwór z pozycji **{position}**.",
         "noLyricsFound": "Nie znaleziono tekstu dla tego utworu.",
         "noRadioResults": "Nie znaleziono żadnych stacji radiowych.",
-        "nextUp": "Następny utwór:"
+        "nextUp": "Następny utwór:",
+        "radioMenuTitle": "Verve - Radio",
+        "radioMenuDescription": "Wyszukaj stację radiową, którą chcesz odtworzyć za pomocą przycisku poniżej.",
+        "searchRadioModalTitle": "Wyszukiwanie stacji radiowej",
+        "searchRadioModalDescription": "Wprowadź nazwę stacji radiowej:",
+        "radioSelectPlaceholder": "Wybierz stację radiową",
+        "radioNoHomepage": "Brak dostępnej strony głównej.",
+        "addingRadioToQueue": "Dodawanie stacji radiowej do kolejki...",
+        "maxCapacity": "Osiągnięto maksymalną pojemność kolejki. Można dodać maksymalnie 200 utworów na raz.",
+        "searchModalTitle": "Wyszukiwanie utworu",
+        "searchModalDescription": "Wprowadź nazwę utworu, który chcesz wyszukać:",
+        "searchSelectPlaceholder": "Wybierz utwór, który chcesz dodać do kolejki",
+        "addingSearchToQueue": "Dodawanie utworu do kolejki..."
     }
 }

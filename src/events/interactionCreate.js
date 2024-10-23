@@ -7,13 +7,16 @@ const {
   TextInputStyle,
   ActionRowBuilder,
   ButtonBuilder,
-  ButtonStyle
+  ButtonStyle,
+  StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder
 } = require('discord.js');
 const config = require('../config');
 const { writeFileSync } = require('fs');
 const { useQueue, useHistory, QueueRepeatMode } = require('discord-player');
 const Genius = require('genius-lyrics');
 const { geniusKey } = require('../config');
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const gClient = new Genius.Client(geniusKey);
 
 module.exports = {
@@ -23,6 +26,7 @@ module.exports = {
     if (interaction.user.bot) return;
     const guildData = require(`../datas/guilds/${interaction.guild.id}/data.json`);
     const lang = require(`../locale/${guildData.lang}.json`);
+    const queue = useQueue(interaction.guild.id);
 
     // Command Handler
     if (interaction.type == InteractionType.ApplicationCommand) {
@@ -82,7 +86,6 @@ module.exports = {
             JSON.stringify(guildData, null, 2)
           );
 
-          const queue = useQueue(interaction.guild.id);
           if (queue) queue.options.metadata.lang = lang;
 
           const e = new EmbedBuilder()
@@ -160,7 +163,6 @@ module.exports = {
 
       // Music Player Buttons Handler
       else if (interaction.customId.startsWith('m.')) {
-        const queue = useQueue(interaction.guild.id);
         if (!queue)
           return interaction.reply({
             content: lang.music.noActiveQueue,
@@ -330,7 +332,11 @@ module.exports = {
           case 'm.goback':
             queue.queueInt = interaction;
             queue.menuUpdateInterval = null;
-            client.updateCurrentMenu(queue, true);
+            if (queue.currentTrack || queue.tracks.data.length > 0) {
+              client.updateCurrentMenu(queue, true);
+            } else {
+              client.updateCurrentMenu(queue, false, 'finish');
+            }
             break;
           case 'm.left':
             queue.queueInt = interaction;
@@ -374,6 +380,121 @@ module.exports = {
             interaction.deferUpdate();
             client.updateCurrentMenu(queue, false);
             break;
+          case 'm.search':
+            const searchModal = new ModalBuilder()
+              .setCustomId('m.search')
+              .setTitle(lang.music.searchModalTitle);
+
+            const inputSearch = new TextInputBuilder()
+              .setCustomId('m.inputsearch')
+              .setLabel(lang.music.searchModalDescription)
+              .setRequired(true)
+              .setPlaceholder('Darude - Sandstorm')
+              .setStyle(TextInputStyle.Short);
+
+            const modalRowSearch = new ActionRowBuilder().addComponents(inputSearch);
+            searchModal.addComponents(modalRowSearch);
+
+            await interaction.showModal(searchModal);
+            break;
+          case 'm.searchradio':
+            const searchRadioModal = new ModalBuilder()
+              .setCustomId('m.searchradio')
+              .setTitle(lang.music.searchRadioModalTitle);
+
+            const inputRadio = new TextInputBuilder()
+              .setCustomId('m.searchradioInput')
+              .setLabel(lang.music.searchRadioModalDescription)
+              .setRequired(true)
+              .setPlaceholder('Jazz')
+              .setStyle(TextInputStyle.Short);
+
+            const modalRowRadio = new ActionRowBuilder().addComponents(inputRadio);
+            searchRadioModal.addComponents(modalRowRadio);
+
+            await interaction.showModal(searchRadioModal);
+            break;
+          case 'm.radioSelect':
+            const selectedRadio = queue.radioSearchResults[parseInt(interaction.values[0])];
+            if (!queue) {
+              return interaction.reply({
+                content: lang.common.error,
+                ephemeral: true
+              });
+            }
+
+            await interaction.reply({ content: lang.music.addingRadioToQueue, ephemeral: true });
+
+            try {
+              const { track } = await client.player.play(
+                interaction.member.voice.channel,
+                selectedRadio.url_resolved,
+                {
+                  nodeOptions: {
+                    metadata: {
+                      interaction: interaction,
+                      client: client
+                    }
+                  },
+                  requestedBy: interaction.user
+                }
+              );
+
+              await interaction.followUp({
+                content: client.repVars(lang.music.addedToQueue, {
+                  track: track.title
+                }),
+                ephemeral: true
+              });
+            } catch (e) {
+              console.log(e);
+              let errorId = client.genErrorId();
+              client.sendTrackback(e, errorId, client.trackBackChannel);
+              return interaction.reply({
+                content: client.repVars(lang.common.errorId, { errorId: errorId }),
+                ephemeral: true
+              });
+            }
+            break;
+          case 'm.searchSelect':
+            const selectedTrack = interaction.values[0];
+            if (!queue) {
+              return interaction.reply({
+                content: lang.common.error,
+                ephemeral: true
+              });
+            }
+
+            await interaction.reply({ content: lang.music.addingSearchToQueue, ephemeral: true });
+
+            try { 
+              const { track } = await client.player.play(interaction.member.voice.channel, selectedTrack, {
+                nodeOptions: {
+                  metadata: {
+                    interaction: interaction,
+                    client: client
+                  }
+                },
+                requestedBy: interaction.user
+              });
+
+              await interaction.followUp({
+                content: client.repVars(lang.music.addedToQueue, {
+                  track: track.title
+                }),
+                ephemeral: true
+              });
+            } catch (e) {
+              console.log(e);
+              let errorId = client.genErrorId();
+              client.sendTrackback(e, errorId, client.trackBackChannel);
+              return interaction.reply({
+                content: client.repVars(lang.common.errorId, { errorId: errorId }),
+                ephemeral: true
+              });
+            }
+
+            break;
           default:
             await interaction.reply({
               content: lang.common.thisShouldNeverHappen,
@@ -383,14 +504,12 @@ module.exports = {
         }
       }
     }
-
     // Modals Handler
     else if (interaction.type == 5) {
       // Adding song to queue
       if (interaction.customId == 'm.query') {
         await interaction.deferReply({ ephemeral: true });
         const query = interaction.fields.getTextInputValue('m.inputquery');
-        const queue = useQueue(interaction.guild.id);
         if (!queue)
           return interaction.reply({
             content: lang.common.error,
@@ -424,6 +543,11 @@ module.exports = {
               content: lang.music.outOfSpace,
               ephemeral: true
             });
+          } else if (e.message.includes('Max capacity reached')) {
+            return interaction.editReply({
+              content: lang.music.maxCapacity,
+              ephemeral: true
+            });
           } else {
             console.log(e);
             let errorId = client.genErrorId();
@@ -437,7 +561,6 @@ module.exports = {
       } else if (interaction.customId == 'm.seekModal') {
         await interaction.deferReply({ ephemeral: true });
         const seekTime = interaction.fields.getTextInputValue('m.seekModalInput');
-        const queue = useQueue(interaction.guild.id);
         if (!queue)
           return interaction.reply({
             content: lang.common.error,
@@ -460,7 +583,6 @@ module.exports = {
       } else if (interaction.customId == 'm.jumpModal') {
         await interaction.deferReply({ ephemeral: true });
         const jumpPosition = parseInt(interaction.fields.getTextInputValue('m.jumpModalInput'));
-        const queue = useQueue(interaction.guild.id);
         if (!queue)
           return interaction.reply({
             content: lang.common.error,
@@ -488,7 +610,6 @@ module.exports = {
         }
       } else if (interaction.customId == 'm.removeModal') {
         const removePosition = parseInt(interaction.fields.getTextInputValue('m.removeModalInput'));
-        const queue = useQueue(interaction.guild.id);
         if (!queue)
           return interaction.reply({
             content: lang.common.error,
@@ -510,6 +631,88 @@ module.exports = {
           client.sendTrackback(e, errorId, client.trackBackChannel);
           return interaction.editReply({
             content: client.repVars(lang.common.errorId, { errorId: errorId }),
+            ephemeral: true
+          });
+        }
+      } else if (interaction.customId == 'm.searchradio') {
+        const radioSearch = interaction.fields.getTextInputValue('m.searchradioInput');
+
+        if (!queue)
+          return interaction.reply({
+            content: lang.common.error,
+            ephemeral: true
+          });
+
+        try {
+          queue.radioSearchResults = await fetch(
+            `https://de1.api.radio-browser.info/json/stations/search?limit=25&name=${radioSearch}&hidebroken=true&order=clickcount&reverse=true`
+          ).then((res) => res.json());
+          const selectMenu = new StringSelectMenuBuilder()
+            .setCustomId('m.radioSelect')
+            .setPlaceholder(lang.music.radioSelectPlaceholder)
+            .setMinValues(1)
+            .setMaxValues(1);
+
+          queue.radioSearchResults.forEach((result) => {
+            selectMenu.addOptions(
+              new StringSelectMenuOptionBuilder()
+                .setLabel(result.name)
+                .setValue(queue.radioSearchResults.indexOf(result).toString())
+                .setDescription(result.homepage || lang.music.radioNoHomepage)
+                .setEmoji(client.codeToFlag(result.countrycode) || '🌐')
+            );
+          });
+
+          const row = new ActionRowBuilder().addComponents(selectMenu);
+          await interaction.update({ components: [row] });
+        } catch (e) {
+          console.log(e);
+          return interaction.reply({
+            content: lang.common.error,
+            ephemeral: true
+          });
+        }
+      } else if (interaction.customId == 'm.search') {
+        const searchQuery = interaction.fields.getTextInputValue('m.inputsearch');
+        if (!queue)
+          return interaction.reply({
+            content: lang.common.error,
+            ephemeral: true
+          });
+        try {
+          const searchResults = await client.player.search(searchQuery, {
+            requestedBy: interaction.user
+          });
+          const selectMenu = new StringSelectMenuBuilder()
+            .setCustomId('m.searchSelect')
+            .setPlaceholder(lang.music.searchSelectPlaceholder)
+            .setMinValues(1)
+            .setMaxValues(1);
+
+          const uniqueValues = new Set();
+
+          for (let i = 0; i < 25; i++) {
+            if (!searchResults.tracks[i]) break;
+            const value = searchResults.tracks[i].url;
+
+            if (!uniqueValues.has(value)) {
+              selectMenu.addOptions(
+                new StringSelectMenuOptionBuilder()
+                  .setLabel(searchResults.tracks[i].title)
+                  .setValue(value)
+                  .setDescription(searchResults.tracks[i].author)
+                  .setEmoji('🎵')
+              );
+              uniqueValues.add(value);
+            }
+          }
+
+          const row = new ActionRowBuilder().addComponents(selectMenu);
+          await interaction.update({ components: [row] });
+        } catch (e) {
+          console.log(e);
+          return interaction.reply({
+            content: lang.common.error,
             ephemeral: true
           });
         }

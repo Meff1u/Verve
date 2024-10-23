@@ -89,7 +89,7 @@ module.exports = {
       if (action == 'finish' && queue.tracks.data.length == 0) {
         clearInterval(queue.menuUpdateInterval);
         queue.menuUpdateInterval = null;
-        const row = createActionRow([client.buttons.add, client.buttons.search]);
+        const row = createActionRow([client.buttons.add, client.buttons.search, client.buttons.radio]);
         queue.updateEmbed = createEmbed(
           `Verve - ${lang.commands.start.readyToPlay}`,
           null,
@@ -142,7 +142,7 @@ module.exports = {
       // Radio menu
       else if (action == 'radio') {
         clearInterval(queue.menuUpdateInterval);
-        const row = createActionRow([client.buttons.goback]);
+        const row = createActionRow([client.buttons.goback, client.buttons.searchradio]);
         queue.updateEmbed = createEmbed(
           lang.music.radioMenuTitle,
           null,
