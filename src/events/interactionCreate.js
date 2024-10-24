@@ -370,6 +370,7 @@ module.exports = {
             client.updateCurrentMenu(queue, false, `queue-${queue.queuePage}`);
             break;
           case 'm.stop':
+            clearInterval(queue.menuUpdateInterval);
             await queue.delete();
             const pChannel = interaction.guild.channels.cache.get(guildData.playerChannel);
             await pChannel.messages.fetch(guildData.playerMessage).then((msg) => msg.delete());
@@ -411,6 +412,7 @@ module.exports = {
               .setLabel(lang.music.searchModalDescription)
               .setRequired(true)
               .setPlaceholder('Darude - Sandstorm')
+              .setMaxLength(200)
               .setStyle(TextInputStyle.Short);
 
             const modalRowSearch = new ActionRowBuilder().addComponents(inputSearch);

@@ -90,6 +90,7 @@
         "searchModalTitle": "Search for a song",
         "searchModalDescription": "Enter the song name you want to search:",
         "searchSelectPlaceholder": "Select the song you want to add to the queue",
-        "addingSearchToQueue": "Adding song to the queue..."
+        "addingSearchToQueue": "Adding song to the queue...",
+        "fileTitle": "Playing from file:"
     }
 }

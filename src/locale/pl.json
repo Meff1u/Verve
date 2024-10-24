@@ -90,6 +90,7 @@
         "searchModalTitle": "Wyszukiwanie utworu",
         "searchModalDescription": "Wprowadź nazwę utworu, który chcesz wyszukać:",
         "searchSelectPlaceholder": "Wybierz utwór, który chcesz dodać do kolejki",
-        "addingSearchToQueue": "Dodawanie utworu do kolejki..."
+        "addingSearchToQueue": "Dodawanie utworu do kolejki...",
+        "fileTitle": "Odtwarzanie z pliku:"
     }
 }

@@ -164,6 +164,7 @@ module.exports = {
       }
       const track = queue.currentTrack;
       if (!track) return;
+      const trackDuration = track.raw.metadata?.duration == 0 ? track.raw.metadata?.duration : track.raw.duration_ms;
 
       // Update the menu
       let currentTextDuration = dt.d2t(Math.floor(queue.node.playbackTime / 1000)).split('.')[0];
@@ -181,7 +182,7 @@ module.exports = {
         }
       );
 
-      if (track.queryType != 'arbitrary' && !track.raw.live) {
+      if (trackDuration != 0) {
         queue.updateEmbed.addFields({
           name: `${currentTextDuration} / ${track.duration}`,
           value: progressbar.filledBar(
@@ -231,8 +232,10 @@ module.exports = {
         thridButtonRow1 = client.buttons.pause;
       }
 
-      if (track.queryType == 'arbitrary' || track.raw.live) {
+      if (trackDuration == 0) {
         queue.updateEmbed.data.author = { name: lang.music.arbitraryTitle };
+      } else if (track.queryType == 'arbitrary') {
+        queue.updateEmbed.data.author = { name: lang.music.fileTitle };
       }
 
       const menuRow1 = createActionRow([
@@ -248,7 +251,7 @@ module.exports = {
       let forthButtonRow2;
       let firstButtonRow2;
 
-      if (track.queryType == 'arbitrary' || track.raw.live) {
+      if (trackDuration == 0) {
         firstButtonRow2 = client.buttons.seekdisabled;
         thridButtonRow2 = client.buttons.lyricsdisabled;
       } else {
@@ -295,11 +298,11 @@ module.exports = {
       }
 
       if (queue.menuUpdateInterval) {
-        if (queue.node.isPaused() || track.queryType == 'arbitrary' || track.raw.live) {
+        if (queue.node.isPaused() || trackDuration == 0) {
           clearInterval(queue.menuUpdateInterval);
           queue.menuUpdateInterval = null;
         }
-      } else if (doInterval && track.queryType != 'arbitrary' && !track.raw.live) {
+      } else if (doInterval && trackDuration != 0) {
         queue.menuUpdateInterval = setInterval(() => {
           if (queue.node.isPaused()) {
             clearInterval(queue.menuUpdateInterval);
