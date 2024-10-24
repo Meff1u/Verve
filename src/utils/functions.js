@@ -71,6 +71,11 @@ module.exports = {
       return Math.floor(10000 + Math.random() * 90000);
     };
 
+    // URL trimming
+    client.trimURL = function (url) {
+      return url.match(/^(https?:\/\/[^\/]+)\//)[0];
+    };
+
     // Get queue tracks
     function getQueueTracks(queue, page) {
       page -= 1;
@@ -89,7 +94,11 @@ module.exports = {
       if (action == 'finish' && queue.tracks.data.length == 0) {
         clearInterval(queue.menuUpdateInterval);
         queue.menuUpdateInterval = null;
-        const row = createActionRow([client.buttons.add, client.buttons.search, client.buttons.radio]);
+        const row = createActionRow([
+          client.buttons.add,
+          client.buttons.search,
+          client.buttons.radio
+        ]);
         queue.updateEmbed = createEmbed(
           `Verve - ${lang.commands.start.readyToPlay}`,
           null,
@@ -168,7 +177,7 @@ module.exports = {
         track.thumbnail || null,
         client.mainColor,
         {
-          text: `Host: ${queue.options.metadata.interaction.user.tag} | ${lang.music.songsInQueue}: ${queue.tracks.data.length}`
+          text: `Host: ${queue.options.metadata.interaction.user.tag} | ${lang.music.songsInQueue}: ${queue.tracks.data.length} | v${client.package.version}`
         }
       );
 

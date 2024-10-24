@@ -1,6 +1,6 @@
 {
   "name": "verve",
-  "version": "3.0.0-pre9",
+  "version": "3.0.0-pre10",
   "description": "Verve - Your favourite music tool",
   "main": "index.js",
   "scripts": {

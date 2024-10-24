@@ -321,8 +321,21 @@ module.exports = {
             await interaction.showModal(removeModal);
             break;
           case 'm.radio':
-            queue.radioInt = interaction;
-            client.updateCurrentMenu(queue, false, 'radio');
+            const searchRadioModal = new ModalBuilder()
+              .setCustomId('m.searchradio')
+              .setTitle(lang.music.searchRadioModalTitle);
+
+            const inputRadio = new TextInputBuilder()
+              .setCustomId('m.searchradioInput')
+              .setLabel(lang.music.searchRadioModalDescription)
+              .setRequired(true)
+              .setPlaceholder('Jazz')
+              .setStyle(TextInputStyle.Short);
+
+            const modalRowRadio = new ActionRowBuilder().addComponents(inputRadio);
+            searchRadioModal.addComponents(modalRowRadio);
+
+            await interaction.showModal(searchRadioModal);
             break;
           case 'm.queue':
             queue.queueInt = interaction;
@@ -332,6 +345,14 @@ module.exports = {
           case 'm.goback':
             queue.queueInt = interaction;
             queue.menuUpdateInterval = null;
+            if (queue.currentTrack || queue.tracks.data.length > 0) {
+              client.updateCurrentMenu(queue, true);
+            } else {
+              client.updateCurrentMenu(queue, false, 'finish');
+            }
+            break;
+          case 'm.cancel':
+            await interaction.deferUpdate();
             if (queue.currentTrack || queue.tracks.data.length > 0) {
               client.updateCurrentMenu(queue, true);
             } else {
@@ -396,23 +417,6 @@ module.exports = {
             searchModal.addComponents(modalRowSearch);
 
             await interaction.showModal(searchModal);
-            break;
-          case 'm.searchradio':
-            const searchRadioModal = new ModalBuilder()
-              .setCustomId('m.searchradio')
-              .setTitle(lang.music.searchRadioModalTitle);
-
-            const inputRadio = new TextInputBuilder()
-              .setCustomId('m.searchradioInput')
-              .setLabel(lang.music.searchRadioModalDescription)
-              .setRequired(true)
-              .setPlaceholder('Jazz')
-              .setStyle(TextInputStyle.Short);
-
-            const modalRowRadio = new ActionRowBuilder().addComponents(inputRadio);
-            searchRadioModal.addComponents(modalRowRadio);
-
-            await interaction.showModal(searchRadioModal);
             break;
           case 'm.radioSelect':
             const selectedRadio = queue.radioSearchResults[parseInt(interaction.values[0])];
@@ -658,13 +662,14 @@ module.exports = {
               new StringSelectMenuOptionBuilder()
                 .setLabel(result.name)
                 .setValue(queue.radioSearchResults.indexOf(result).toString())
-                .setDescription(result.homepage || lang.music.radioNoHomepage)
+                .setDescription(result.homepage ? client.trimURL(result.homepage) : lang.music.radioNoHomepage)
                 .setEmoji(client.codeToFlag(result.countrycode) || '🌐')
             );
           });
 
           const row = new ActionRowBuilder().addComponents(selectMenu);
-          await interaction.update({ components: [row] });
+          const cancelrow = new ActionRowBuilder().addComponents(client.buttons.cancel);
+          await interaction.update({ components: [row, cancelrow] });
         } catch (e) {
           console.log(e);
           return interaction.reply({
